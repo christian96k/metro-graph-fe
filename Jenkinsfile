@@ -45,12 +45,11 @@ pipeline {
                     // Usa ssh-agent per copiare e eseguire il docker-compose sulla VM
                     sshagent([VM_SSH_CREDENTIALS]) {
                         // Copia il file docker-compose sulla VM come root
-                        sh "scp -i /root/.ssh/id_rsa dockerfiles/docker-compose.yml root@${VM_IP}:${VM_DOCKER_COMPOSE_PATH}"
+                        sh "scp dockerfiles/docker-compose.yml root@${VM_IP}:${VM_DOCKER_COMPOSE_PATH}"
 
                         // Esegui il docker-compose sulla VM come root
-                        sh "ssh -i /root/.ssh/id_rsa root@${VM_IP} 'cd /home/root/dockerfiles && docker-compose -f docker-compose.yml up -d --build'"
+                        sh "ssh root@${VM_IP} 'cd /home/root/dockerfiles && docker-compose -f docker-compose.yml up -d --build'"
                     }
-
                 }
             }
         }
