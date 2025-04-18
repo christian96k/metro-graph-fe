@@ -1,0 +1,9 @@
+services:
+  metro-graph-frontend:
+    container_name: metro-graph-frontend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: metro-graph-frontend:latest
+    ports:
+      - "5173:5173"
