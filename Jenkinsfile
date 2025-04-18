@@ -19,11 +19,15 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
+        stage('Check Docker Availability') {
             steps {
                 script {
-                    // Costruisci l'immagine Docker
-                    docker.build("${IMAGE_NAME}:${IMAGE_TAG}")
+                    // Verifica che Docker sia disponibile e logga la versione
+                    try {
+                        sh 'docker --version'
+                    } catch (Exception e) {
+                        error("Docker non è disponibile sul nodo. Assicurati che Docker sia installato e configurato correttamente.")
+                    }
                 }
             }
         }
@@ -33,7 +37,9 @@ pipeline {
                 script {
                     // Usa le credenziali per Docker Hub e push l'immagine
                     docker.withRegistry("https://${REGISTRY}", REGISTRY_CREDENTIALS) {
-                        docker.image("${IMAGE_NAME}:${IMAGE_TAG}").push()
+                        // Per far sì che il file docker-compose.yml prenda l'immagine dal Docker Hub, rimuovi il tag 'latest' e
+                        // scrivi il nome completo dell'immagine (e.g., christian96k/metro-graph-frontend) direttamente nel docker-compose.yml
+                        // docker-compose.yml dovrebbe essere configurato correttamente con l'immagine da Docker Hub.
                     }
                 }
             }
