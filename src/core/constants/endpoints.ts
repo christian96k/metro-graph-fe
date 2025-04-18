@@ -1,4 +1,3 @@
-// TODO: move to env file
 export const BASE_URL = `http://10.0.106.43:8000`
 
 // entry version api
