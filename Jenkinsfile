@@ -5,54 +5,58 @@ pipeline {
         IMAGE_NAME = 'metro-graph-frontend'
         IMAGE_TAG = 'latest'
         REGISTRY = 'docker.io'
-        REGISTRY_CREDENTIALS = 'docker-hub-id'  // Credenziali Docker Hub
-        GITHUB_CREDENTIALS = 'github-id'  // Credenziali GitHub
-        VM_SSH_CREDENTIALS = 'ssh-id'  // Credenziali SSH per la VM
-        VM_IP = '64.227.68.251'  // IP della tua VM
-        VM_DOCKER_COMPOSE_PATH = '/home/root/dockerfiles/docker-compose.yml'  // Percorso dove si trova docker-compose.yml sulla VM
+        REGISTRY_CREDENTIALS = 'docker-hub-id'
+        GITHUB_CREDENTIALS = 'github-id'
+        VM_SSH_CREDENTIALS = 'ssh-id'
+        VM_IP = '64.227.68.251'
+        FULL_IMAGE_NAME = "${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}"
+    }
+
+    triggers {
+        // Usa webhook GitHub se possibile per trigger immediato
+        pollSCM('* * * * *')
     }
 
     stages {
-        stage('Checkout') {
+        stage('Checkout Repo') {
             steps {
                 git credentialsId: "${GITHUB_CREDENTIALS}", branch: 'dev', url: 'https://github.com/christian96k/metro-graph-fe.git'
             }
         }
 
-        stage('Check Docker Availability') {
+        stage('Build Image via Docker Compose') {
             steps {
                 script {
-                    try {
-                        sh 'docker --version'
-                    } catch (Exception e) {
-                        error("Docker non è disponibile sul nodo. Assicurati che Docker sia installato e configurato correttamente.")
-                    }
+                    // Esegui docker-compose build, il file è nel repo
+                    sh 'docker compose -f docker-compose.yml build'
                 }
             }
         }
 
-        stage('Build and Push to Docker Registry') {
+        stage('Tag & Push Image to Docker Hub') {
             steps {
                 script {
-                    // Build e push dell'immagine Docker
                     docker.withRegistry("https://${REGISTRY}", REGISTRY_CREDENTIALS) {
-                        def customImage = docker.build("${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}")
-                        customImage.push()  // Esegui il push dell'immagine
+                        // Tagga l'immagine (assicurati che la compose la crei col nome corretto)
+                        sh "docker tag metro-graph-frontend:latest ${FULL_IMAGE_NAME}"
+                        sh "docker push ${FULL_IMAGE_NAME}"
                     }
                 }
             }
         }
 
-        stage('Deploy to Server') {
+        stage('Deploy on Remote VM') {
             steps {
                 script {
-                    // Usa ssh-agent per copiare e eseguire il docker-compose sulla VM
                     sshagent([VM_SSH_CREDENTIALS]) {
-                        // Copia il file docker-compose sulla VM come root
-                        sh "scp dockerfiles/docker-compose.yml root@${VM_IP}:${VM_DOCKER_COMPOSE_PATH}"
-
-                        // Esegui il docker-compose sulla VM come root
-                        sh "ssh root@${VM_IP} 'cd /home/root/dockerfiles && docker-compose -f docker-compose.yml up -d --build'"
+                        sh """
+                            ssh root@${VM_IP} '
+                                cd /home/root/metro-graph-fe &&
+                                git pull origin dev &&
+                                docker compose pull &&
+                                docker compose up -d
+                            '
+                        """
                     }
                 }
             }
@@ -61,7 +65,6 @@ pipeline {
 
     post {
         always {
-            // Pulisce l'area di lavoro dopo il deploy
             cleanWs()
         }
     }
