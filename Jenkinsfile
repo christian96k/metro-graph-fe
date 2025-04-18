@@ -5,9 +5,9 @@ pipeline {
         IMAGE_NAME = 'metro-graph-frontend'
         IMAGE_TAG = 'latest'
         REGISTRY = 'docker.io'
-        REGISTRY_CREDENTIALS = '38ed19f2-075f-4f68-bb44-bc4179e8ad4e'  // Credenziali Docker Hub
-        GITHUB_CREDENTIALS = 'c7c14c40-cd6b-4037-b3b3-db921eb74339'  // Credenziali GitHub
-        VM_SSH_CREDENTIALS = 'ssh-metro-graph-id'  // Credenziali SSH per la VM
+        REGISTRY_CREDENTIALS = 'docker-hub-id'  // Credenziali Docker Hub
+        GITHUB_CREDENTIALS = 'github-id'  // Credenziali GitHub
+        VM_SSH_CREDENTIALS = 'ssh-id'  // Credenziali SSH per la VM
         VM_IP = '64.227.68.251'  // IP della tua VM
         VM_DOCKER_COMPOSE_PATH = '/home/root/dockerfiles/docker-compose.yml'  // Percorso dove si trova docker-compose.yml sulla VM
     }
@@ -22,7 +22,6 @@ pipeline {
         stage('Check Docker Availability') {
             steps {
                 script {
-                
                     try {
                         sh 'docker --version'
                     } catch (Exception e) {
@@ -32,14 +31,13 @@ pipeline {
             }
         }
 
-        stage('Push to Docker Registry') {
+        stage('Build and Push to Docker Registry') {
             steps {
                 script {
-                    // Usa le credenziali per Docker Hub e push l'immagine
+                    // Build e push dell'immagine Docker
                     docker.withRegistry("https://${REGISTRY}", REGISTRY_CREDENTIALS) {
-                        // Per far sì che il file docker-compose.yml prenda l'immagine dal Docker Hub, rimuovi il tag 'latest' e
-                        // scrivi il nome completo dell'immagine (e.g., christian96k/metro-graph-frontend) direttamente nel docker-compose.yml
-                        // docker-compose.yml dovrebbe essere configurato correttamente con l'immagine da Docker Hub.
+                        def customImage = docker.build("${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}")
+                        customImage.push()  // Esegui il push dell'immagine
                     }
                 }
             }
