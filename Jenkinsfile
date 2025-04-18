@@ -22,7 +22,7 @@ pipeline {
         stage('Check Docker Availability') {
             steps {
                 script {
-                    // Verifica che Docker sia disponibile e logga la versione
+                
                     try {
                         sh 'docker --version'
                     } catch (Exception e) {
