@@ -1,42 +1,65 @@
 pipeline {
-    agent any  // Usa qualsiasi nodo disponibile
+    agent any
 
     environment {
         IMAGE_NAME = 'metro-graph-frontend'
         IMAGE_TAG = 'latest'
         REGISTRY = 'docker.io'
-        REGISTRY_CREDENTIALS = 'docker-hub-id'         // Credenziali Docker Hub
-        GITHUB_CREDENTIALS = 'github-id'               // Credenziali GitHub
-        VM_SSH_CREDENTIALS = 'ssh-id'                  // SSH key registrata su Jenkins
-        VM_IP = '64.227.68.251'                        // IP della VM
+        REGISTRY_CREDENTIALS = 'docker-hub-id'
+        VM_SSH_CREDENTIALS = 'ssh-id'
+        VM_IP = '64.227.68.251'
+        FULL_IMAGE_NAME = "${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}"
+    }
+
+    triggers {
+        // Solo se non hai un webhook GitHub, altrimenti rimuovi questa parte
+        pollSCM('H/2 * * * *')
     }
 
     stages {
-        stage('Checkout from GitHub') {
-            steps {
-                git credentialsId: "${GITHUB_CREDENTIALS}", branch: 'dev', url: 'https://github.com/christian96k/metro-graph-fe.git'
-            }
-        }
 
-        stage('Build Docker Image') {
+        stage('Build Image via Docker Compose') {
             steps {
                 script {
-                    docker.withRegistry("https://${REGISTRY}", REGISTRY_CREDENTIALS) {
-                        def appImage = docker.build("${IMAGE_NAME}:${IMAGE_TAG}")
-                        appImage.push()
+                    // Verifica la versione di Docker
+                    def dockerVersion = sh(script: 'docker --version', returnStdout: true).trim()
+                    echo "Docker Version: ${dockerVersion}"
+
+                    if (dockerVersion.contains('20.') || dockerVersion.contains('19.')) {
+                        // Docker 20.10+ supporta il comando senza trattino
+                        sh 'docker compose -f docker-compose.yml build'
+                    } else {
+                        // Docker <20.10 usa il trattino
+                        sh 'docker-compose -f docker-compose.yml build'
                     }
                 }
             }
         }
 
-        stage('Deploy on Remote VM via Docker Compose') {
+        stage('Tag & Push Image to Docker Hub') {
             steps {
                 script {
-                    // Questo comando sarà eseguito direttamente sulla macchina dove Jenkins è in esecuzione
-                    sh """
-                        docker pull ${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG} &&
-                        docker-compose -f /home/root/dockerfiles/docker-compose.yml up -d
-                    """
+                    docker.withRegistry("https://${REGISTRY}", REGISTRY_CREDENTIALS) {
+                        sh "docker tag metro-graph-frontend:latest ${FULL_IMAGE_NAME}"
+                        sh "docker push ${FULL_IMAGE_NAME}"
+                    }
+                }
+            }
+        }
+
+        stage('Deploy on Remote VM') {
+            steps {
+                script {
+                    sshagent([VM_SSH_CREDENTIALS]) {
+                        sh """
+                            ssh root@${VM_IP} '
+                                cd /home/root/metro-graph-fe &&
+                                git pull origin dev &&
+                                docker-compose pull &&
+                                docker-compose up -d --build
+                            '
+                        """
+                    }
                 }
             }
         }
