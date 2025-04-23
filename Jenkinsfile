@@ -65,35 +65,11 @@ pipeline {
             }
         }
 
+
+
     }
 
     post {
-        success {
-            script {
-                // Invia una mail di successo alla persona che ha fatto il commit (comitter) e a te
-                def committerEmail = sh(script: 'git log -1 --pretty=format:"%ae"', returnStdout: true).trim()
-                emailext(
-                    to: "${committerEmail}",
-                    cc: 'christian.k96@hotmail.it',  // Invia anche una copia a te
-                    subject: "Build Success: ${PROJECT_NAME} #${BUILD_NUMBER}",
-                    body: "La build ${PROJECT_NAME} #${BUILD_NUMBER} è stata completata con successo. Puoi vedere i dettagli della build al link: ${BUILD_URL}",
-                    attachLog: true
-                )
-            }
-        }
-        failure {
-            script {
-                // Invia una mail di errore alla persona che ha fatto il commit (comitter) e a te
-                def committerEmail = sh(script: 'git log -1 --pretty=format:"%ae"', returnStdout: true).trim()
-                emailext(
-                    to: "${committerEmail}",
-                    cc: 'christian.k96@hotmail.it',  // Invia anche una copia a te
-                    subject: "Build Failed: ${PROJECT_NAME} #${BUILD_NUMBER}",
-                    body: "La build ${PROJECT_NAME} #${BUILD_NUMBER} ha fallito. Puoi vedere i dettagli della build al link: ${BUILD_URL}",
-                    attachLog: true
-                )
-            }
-        }
         always {
             cleanWs() // Pulizia dell'ambiente di lavoro dopo la pipeline
         }
