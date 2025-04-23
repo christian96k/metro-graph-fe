@@ -4,14 +4,12 @@ pipeline {
     environment {
         IMAGE_NAME = 'metro-graph-frontend'
         IMAGE_TAG = 'latest'
-        REGISTRY_CREDENTIALS = 'docker-hub-id'  // Usa le credenziali Jenkins per Docker Hub
-        DOCKER_USERNAME = 'christian96k'  // Il tuo nome utente Docker Hub
-        FULL_IMAGE_NAME = "${DOCKER_USERNAME}/${IMAGE_NAME}:${IMAGE_TAG}"  // Semplificazione del nome immagine
+        REGISTRY = 'docker.io' // Docker Hub è il registry predefinito
+        REGISTRY_CREDENTIALS = 'docker-hub-id' // Usa le credenziali Jenkins per Docker Hub
+        FULL_IMAGE_NAME = "${DOCKER_USERNAME}/${IMAGE_NAME}:${IMAGE_TAG}"  // Immagine con il nome utente Docker Hub
     }
 
-
     triggers {
-        // Webhook GitHub (verifica il push)
         pollSCM('H/2 * * * *')  // Puoi rimuovere questa parte se usi un webhook GitHub
     }
 
@@ -38,20 +36,20 @@ pipeline {
             }
         }
 
-        // Stage 3: Tag dell'immagine e push su Docker Hub
-        stage('Tag & Push Image to Docker Hub') {
+        // Stage 3: Login su Docker Hub e push dell'immagine
+        stage('Login & Push to Docker Hub') {
             steps {
                 script {
-                    // Login su Docker Hub con credenziali
+                    // Login su Docker Hub con le credenziali di Jenkins
                     withCredentials([usernamePassword(credentialsId: REGISTRY_CREDENTIALS, usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                         sh "echo \$DOCKER_PASSWORD | docker login -u \$DOCKER_USERNAME --password-stdin"
                     }
 
-                    // Pusha l'immagine su Docker Hub solo se la build è riuscita
-                    docker.withRegistry("https://${REGISTRY}", REGISTRY_CREDENTIALS) {
-                        sh "docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${FULL_IMAGE_NAME}"
-                        sh "docker push ${FULL_IMAGE_NAME}"
-                    }
+                    // Tag dell'immagine con il nome completo
+                    sh "docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${FULL_IMAGE_NAME}"
+
+                    // Push dell'immagine su Docker Hub
+                    sh "docker push ${FULL_IMAGE_NAME}"
                 }
             }
         }
