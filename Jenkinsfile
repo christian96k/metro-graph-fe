@@ -1,13 +1,14 @@
 pipeline {
-    agent any
+    agent any  // Usa qualsiasi nodo disponibile
 
     environment {
         IMAGE_NAME = 'metro-graph-frontend'
-        IMAGE_TAG = 'latest'  // Usa il tag che vuoi, es. 'latest' o una versione
+        IMAGE_TAG = 'latest'
         REGISTRY = 'docker.io'
-        REGISTRY_CREDENTIALS = 'docker-hub-username'  // Assicurati che queste siano corrette!
-        GITHUB_CREDENTIALS = 'github-id'
-        VM_IP = '64.227.68.251'  // IP della VM
+        REGISTRY_CREDENTIALS = 'docker-hub-id'         // Credenziali Docker Hub
+        GITHUB_CREDENTIALS = 'github-id'               // Credenziali GitHub
+        VM_SSH_CREDENTIALS = 'ssh-id'                  // SSH key registrata su Jenkins
+        VM_IP = '64.227.68.251'                        // IP della VM
     }
 
     stages {
@@ -17,14 +18,12 @@ pipeline {
             }
         }
 
-        stage('Build and Push Docker Image') {
+        stage('Build Docker Image') {
             steps {
                 script {
-                    docker.withRegistry("https://${REGISTRY}", "${REGISTRY_CREDENTIALS}") {
-                        // Costruisci l'immagine Docker
-                        def appImage = docker.build("christian96k/${IMAGE_NAME}:${IMAGE_TAG}")
-                        // Fai il push dell'immagine al Docker Hub
-                        appImage.push("${IMAGE_TAG}")
+                    docker.withRegistry("https://${REGISTRY}", REGISTRY_CREDENTIALS) {
+                        def appImage = docker.build("${IMAGE_NAME}:${IMAGE_TAG}")
+                        appImage.push()
                     }
                 }
             }
@@ -33,9 +32,9 @@ pipeline {
         stage('Deploy on Remote VM via Docker Compose') {
             steps {
                 script {
-                    // Esegui il pull dell'immagine sulla macchina locale (dove gira Jenkins) e avvia con Docker Compose
+                    // Questo comando sarà eseguito direttamente sulla macchina dove Jenkins è in esecuzione
                     sh """
-                        docker pull christian96k/${IMAGE_NAME}:${IMAGE_TAG}
+                        docker pull ${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG} &&
                         docker-compose -f /home/root/dockerfiles/docker-compose.yml up -d
                     """
                 }
@@ -45,10 +44,7 @@ pipeline {
 
     post {
         always {
-            // Pulisce l'ambiente di lavoro (necessario dentro un blocco node)
-            node {
-                cleanWs()
-            }
+            cleanWs()
         }
     }
 }
