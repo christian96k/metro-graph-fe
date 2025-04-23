@@ -58,6 +58,7 @@ pipeline {
 
     post {
         always {
+            // Spostato il cleanWs all'interno del nodo
             cleanWs() // Pulisce l'ambiente di lavoro dopo ogni esecuzione
         }
     }
