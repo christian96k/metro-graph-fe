@@ -7,8 +7,10 @@ pipeline {
         REGISTRY = 'docker.io'
         REGISTRY_CREDENTIALS = 'docker-hub-id'         // Credenziali Docker Hub
         GITHUB_CREDENTIALS = 'github-id'               // Credenziali GitHub
-        VM_SSH_CREDENTIALS = 'ssh-id'                  // SSH key registrata su Jenkins
+        VM_SSH_CREDENTIALS = 'ssh-id'                  // SSH key registrata su Jenkins (se necessario)
         VM_IP = '64.227.68.251'                        // IP della VM
+        DOCKER_HUB_USERNAME = credentials('docker-hub-username')   // Username Docker Hub (credenziale Jenkins)
+        DOCKER_HUB_PASSWORD = credentials('docker-hub-password')   // Password Docker Hub (credenziale Jenkins)
     }
 
     stages {
@@ -29,18 +31,26 @@ pipeline {
             }
         }
 
-        stage('Deploy on Remote VM via Docker Compose') {
+        stage('Login to Docker Hub') {
             steps {
                 script {
-                    sshagent([VM_SSH_CREDENTIALS]) {
-                        // Sulla VM: fai il pull dell'immagine aggiornata e avvia con docker-compose
-                        sh """
-                            ssh root@${VM_IP} '
-                                docker pull ${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG} &&
-                                docker-compose -f /home/root/dockerfiles/docker-compose.yml up -d
-                            '
-                        """
-                    }
+                    // Effettua il login a Docker Hub
+                    sh """
+                        echo \$DOCKER_HUB_PASSWORD | docker login -u \$DOCKER_HUB_USERNAME --password-stdin
+                    """
+                }
+            }
+        }
+
+        stage('Deploy with Docker Compose') {
+            steps {
+                script {
+                    // Vai nella cartella con il docker-compose.yml
+                    sh """
+                        cd /home/root/dockerfiles && 
+                        docker-compose pull &&
+                        docker-compose up -d
+                    """
                 }
             }
         }
@@ -48,7 +58,7 @@ pipeline {
 
     post {
         always {
-            cleanWs()
+            cleanWs() // Pulisce l'ambiente di lavoro dopo ogni esecuzione
         }
     }
 }
