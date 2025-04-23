@@ -10,12 +10,20 @@ pipeline {
     }
 
     triggers {
-        // Solo se non hai un webhook GitHub, altrimenti rimuovi questa parte
-        pollSCM('H/2 * * * *')
+        // Webhook GitHub (verifica il push)
+        pollSCM('H/2 * * * *')  // Puoi rimuovere questa parte se usi un webhook GitHub
     }
 
     stages {
 
+        // Stage 1: Notifica di ricezione del push da GitHub
+        stage('GitHub Push Notification') {
+            steps {
+                echo "Pipeline triggered by GitHub push."
+            }
+        }
+
+        // Stage 2: Pull del progetto e build dell'immagine dal Dockerfile
         stage('Build Image from Dockerfile') {
             steps {
                 script {
@@ -29,9 +37,11 @@ pipeline {
             }
         }
 
+        // Stage 3: Tag dell'immagine e push su Docker Hub
         stage('Tag & Push Image to Docker Hub') {
             steps {
                 script {
+                    // Pusha l'immagine su Docker Hub solo se la build è riuscita
                     docker.withRegistry("https://${REGISTRY}", REGISTRY_CREDENTIALS) {
                         sh "docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${FULL_IMAGE_NAME}"
                         sh "docker push ${FULL_IMAGE_NAME}"
@@ -40,13 +50,13 @@ pipeline {
             }
         }
 
-        stage('Deploy on Local VM') {
+        // Stage 4: Deploy dell'immagine sulla VM tramite Docker Compose
+        stage('Deploy on Local VM via Docker Compose') {
             steps {
                 script {
-                    // Esegui il deploy sulla stessa macchina (senza SSH)
+                    // Pull dell'immagine sulla stessa macchina e avvio con Docker Compose
                     sh """
-                        cd /home/root/metro-graph-fe &&
-                        git pull origin dev &&
+                        cd /root/dockerfiles &&
                         docker pull ${FULL_IMAGE_NAME} &&
                         docker-compose up -d
                     """
@@ -57,7 +67,7 @@ pipeline {
 
     post {
         always {
-            cleanWs()
+            cleanWs() // Pulizia dell'ambiente di lavoro dopo la pipeline
         }
     }
 }
