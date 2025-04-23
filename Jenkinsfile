@@ -4,11 +4,11 @@ pipeline {
     environment {
         IMAGE_NAME = 'metro-graph-frontend'
         IMAGE_TAG = 'latest'
-        REGISTRY = 'docker.io'
         REGISTRY_CREDENTIALS = 'docker-hub-id'  // Usa le credenziali Jenkins per Docker Hub
         DOCKER_USERNAME = 'christian96k'  // Il tuo nome utente Docker Hub
-        FULL_IMAGE_NAME = "${REGISTRY}/${DOCKER_USERNAME}/${IMAGE_NAME}:${IMAGE_TAG}"  // Corretta sintassi del nome immagine
+        FULL_IMAGE_NAME = "${DOCKER_USERNAME}/${IMAGE_NAME}:${IMAGE_TAG}"  // Semplificazione del nome immagine
     }
+
 
     triggers {
         // Webhook GitHub (verifica il push)
