@@ -29,7 +29,7 @@ function Dashboard() {
       </div>  
 
       {/* GRAPH METRO */}
-      <div className={`dashboard__graph col-12 h-25 ${metroStop$ ? 'col-sm-9 ' : ''} px-0`}>
+      <div className={`dashboard__graph col-12  ${metroStop$ ? 'col-sm-9 h-25' : ''} px-0`}>
         {graphMetro$ ? 
           <GraphMetro/> : <Loader/> 
         }
