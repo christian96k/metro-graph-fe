@@ -29,7 +29,7 @@ import PONTE_LUNGO from '../../assets/images/metro-a-photo/75488-Ponte_lungo.jpg
 import FURIO_CAMILLO from '../../assets/images/metro-a-photo/75490-Furio_Camillo.jpg';
 import COLLI_ALBANI from '../../assets/images/metro-a-photo/75555-Colli_Albani.jpg';
 import FLAMINIO from '../../assets/images/metro-a-photo/81151-Flaminio.jpg';
-
+import SPAGNA from '../../assets/images/metro-a-photo/82366-spagna.jpg';
 
 export const IMAGES_PATH = {
     MA: MA,
@@ -64,4 +64,5 @@ export const IMAGES_PATH = {
     "75490": FURIO_CAMILLO,
     "75555": COLLI_ALBANI,
     "81151": FLAMINIO,
+    "82366": SPAGNA
 };

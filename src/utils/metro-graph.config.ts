@@ -57,7 +57,7 @@ export const METRO_GRAPH_CONFIG: MetroGraphConfig = {
         HEIGHT:"100vh"
     },
     WHEEL_SENSITIVITY: 0.1,
-    MIN_ZOOM: 0.1,
+    MIN_ZOOM: 0.03,
     MAX_ZOOM: 2,
     GRABIFY: true
 }

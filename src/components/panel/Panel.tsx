@@ -1,10 +1,38 @@
+import { useState } from 'react';
 import { IMAGES_PATH } from "../../core/constants/images.path";
 import { MetroStop } from "../../models/metro-data.model";
+import Loader from "../loader/Loader";
 import "./Panel.scss";
 
 export interface PanelProps {
     data: MetroStop | null;
 }
+
+
+
+function ImageWithLoader({ src }: { src: string }) {
+  const [loading, setLoading] = useState(true);
+  const fallback = 'https://picsum.photos/250';
+
+  return (
+    <div className="panel__photo mt-2 mt-md-3 text-center h-100 d-flex align-items-center justify-content-center" style={{minHeight: '15rem'}}>
+      {loading && <Loader />}
+      <img
+        loading="lazy"
+        onLoad={() => setLoading(false)}
+        onError={(e) => {
+          e.currentTarget.src = fallback;
+          console.log('Error loading image, using fallback image');
+          setLoading(false);
+        }}
+        className="img-fluid"
+        src={src}
+        alt=""
+      />
+    </div>
+  );
+}
+
 
 
 const Panel: React.FC<PanelProps> = ({ data }) => {
@@ -25,7 +53,7 @@ const Panel: React.FC<PanelProps> = ({ data }) => {
 
                 {/* PHOTO */}
                 <div className="panel__photo mt-2 mt-md-3 text-center">
-                    <img loading="lazy" className="img-fluid" src={`${IMAGES_PATH[data?.stop_id as keyof typeof IMAGES_PATH]}`}  alt="" />
+                    <ImageWithLoader src={IMAGES_PATH[data?.stop_id as keyof typeof IMAGES_PATH]} />
                 </div>
 
                 {/* BODY */}
