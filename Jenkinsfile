@@ -9,20 +9,9 @@ pipeline {
         FULL_IMAGE_NAME = "${DOCKER_USERNAME}/${IMAGE_NAME}:${IMAGE_TAG}" // Non è necessario specificare docker.io
     }
 
-    triggers {
-        pollSCM('H/2 * * * *')  // Puoi rimuovere questa parte se usi un webhook GitHub
-    }
-
     stages {
 
-        // Stage 1: Notifica di ricezione del push da GitHub
-        stage('GitHub Push Notification') {
-            steps {
-                echo "Pipeline triggered by GitHub push."
-            }
-        }
-
-        // Stage 2: Pull del progetto e build dell'immagine dal Dockerfile
+        // Stage 1: Pull del progetto e build dell'immagine dal Dockerfile
         stage('Build Image from Dockerfile') {
             steps {
                 script {
@@ -36,7 +25,7 @@ pipeline {
             }
         }
 
-        // Stage 3: Login su Docker Hub e push dell'immagine
+        // Stage 2: Login su Docker Hub e push dell'immagine
         stage('Login & Push to Docker Hub') {
             steps {
                 script {
@@ -54,7 +43,7 @@ pipeline {
             }
         }
 
-        // Stage 4: Rimuovi l'immagine locale dopo il push
+        // Stage 3: Rimuovi l'immagine locale dopo il push
         stage('Remove Local Image') {
             steps {
                 script {
@@ -68,15 +57,16 @@ pipeline {
         stage('Deploy on Local VM via Docker Compose') {
             steps {
                 script {
-                    // Pull dell'immagine sulla stessa macchina e avvio con Docker Compose
+                    // Esegui i comandi direttamente sulla VM
                     sh """
-                        cd /root/dockerfiles &&
                         docker pull ${FULL_IMAGE_NAME} &&
+                        cd /root/dockerfiles &&
                         docker-compose up -d
                     """
                 }
             }
         }
+
     }
 
     post {
