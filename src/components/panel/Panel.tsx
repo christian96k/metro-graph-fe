@@ -10,7 +10,7 @@ export interface PanelProps {
 
 
 
-function ImageWithLoader({ src }: { src: string }) {
+function ImageWithLoader({ src, alt }: { src: string, alt:string }) {
   const [loading, setLoading] = useState(true);
   const fallback = 'https://picsum.photos/250';
 
@@ -22,12 +22,12 @@ function ImageWithLoader({ src }: { src: string }) {
         onLoad={() => setLoading(false)}
         onError={(e) => {
           e.currentTarget.src = fallback;
-          console.log('Error loading image, using fallback image');
           setLoading(false);
         }}
+        style={{ display: loading ? 'hidden' : 'block' }}
         className="img-fluid"
         src={src}
-        alt=""
+        alt={alt}
       />
     </div>
   );
@@ -53,7 +53,7 @@ const Panel: React.FC<PanelProps> = ({ data }) => {
 
                 {/* PHOTO */}
                 <div className="panel__photo mt-2 mt-md-3 text-center">
-                    <ImageWithLoader src={IMAGES_PATH[data?.stop_id as keyof typeof IMAGES_PATH]} />
+                    <ImageWithLoader src={IMAGES_PATH[data?.stop_id as keyof typeof IMAGES_PATH]}  alt={data?.stop_name ?? 'station-image-metro'}/>
                 </div>
 
                 {/* BODY */}
