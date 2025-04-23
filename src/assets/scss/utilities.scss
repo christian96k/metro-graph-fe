@@ -48,3 +48,29 @@
     opacity: 0.4 !important;
     background-color: variables.$pure-gray !important;
 }
+
+
+// image fade effect and loader
+.fade-in {
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+.fade-in.loaded {
+    opacity: 1;
+}
+
+
+// load overrlay
+.loader-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: variables.$pure-white;
+    z-index: 1;
+    pointer-events: none;
+}
+img.loaded + .loader-overlay {
+    display: none;
+}

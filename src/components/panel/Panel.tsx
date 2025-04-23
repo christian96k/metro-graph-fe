@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { IMAGES_PATH } from "../../core/constants/images.path";
 import { MetroStop } from "../../models/metro-data.model";
 import Loader from "../loader/Loader";
@@ -8,34 +7,8 @@ export interface PanelProps {
     data: MetroStop | null;
 }
 
-
-
-function ImageWithLoader({ src, alt }: { src: string, alt:string }) {
-  const [loading, setLoading] = useState(true);
-  const fallback = 'https://picsum.photos/250';
-
-  return (
-    <div className="panel__photo mt-2 mt-md-3 text-center h-100 d-flex align-items-center justify-content-center" style={{minHeight: '15rem'}}>
-      {loading && <Loader />}
-      <img
-        loading="lazy"
-        onLoad={() => setLoading(false)}
-        onError={(e) => {
-          e.currentTarget.src = fallback;
-          setLoading(false);
-        }}
-        style={{ display: loading ? 'hidden' : 'block' }}
-        className="img-fluid"
-        src={src}
-        alt={alt}
-      />
-    </div>
-  );
-}
-
-
-
 const Panel: React.FC<PanelProps> = ({ data }) => {
+
     return (
         <section className="panel d-flex flex-column justify-content-between h-100 p-2 p-md-3">
 
@@ -52,9 +25,20 @@ const Panel: React.FC<PanelProps> = ({ data }) => {
                 </div>
 
                 {/* PHOTO */}
-                <div className="panel__photo mt-2 mt-md-3 text-center">
-                    <ImageWithLoader src={IMAGES_PATH[data?.stop_id as keyof typeof IMAGES_PATH]}  alt={data?.stop_name ?? 'station-image-metro'}/>
+                <div className="panel__photo mt-2 mt-md-3 text-center" style={{ minHeight: '15rem', position: 'relative' }}>
+                    <img
+                        src={IMAGES_PATH[data?.stop_id as keyof typeof IMAGES_PATH]}
+                        alt={data?.stop_name ?? 'station-image-metro'}
+                        className="img-fluid fade-in"
+                        loading="lazy"
+                        onLoad={(e) => e.currentTarget.classList.add('loaded')}
+                        onError={(e) => (e.currentTarget.src = 'https://picsum.photos/250')}
+                    />
+                    <div className="loader-overlay">
+                        <Loader />
+                    </div>
                 </div>
+
 
                 {/* BODY */}
                 <div className="panel__body mt-2 mt-md-3">
