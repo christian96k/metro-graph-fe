@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 21.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1"
+	 id="svgLineaMetRo" inkscape:version="0.47 r22583" sodipodi:docname="Metropolitana di Roma B.svg" sodipodi:version="0.32" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:svg="http://www.w3.org/2000/svg"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 604 299.6236"
+	 style="enable-background:new 0 0 604 299.6236;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;}
+	.st1{fill:#ee2926;}
+	.st2{fill:#0071bb;}
+</style>
+<title>Metro di Roma - Linea B</title>
+<g>
+	<polyline class="st0" points="301.854,0 0.0925,0 0.0925,299.6236 301.7615,299.6236 	"/>
+	<g>
+		<path class="st1" d="M301.854,299.6236H0V0h301.854V299.6236z M222.8504,56.3052h-36.3183l-35.6514,122.4093L115.5117,56.3052
+			H79.1009L25.8575,243.3144h35.6514l36.4156-123.1443l34.892,123.0518h18.0642h18.4439l34.703-123.0518l36.4108,123.1443h35.7479
+			L222.8504,56.3052z"/>
+	</g>
+	<rect x="301.854" class="st2" width="302.146" height="299.6236"/>
+	<path class="st0" d="M452.0727,243.4361h-48.0106V55.9742h45.4405c35.4664,0,59.6153,15.2361,59.6153,49.7727
+		c0,23.5989-17.4947,35.7001-28.1453,39.4044c12.9336,3.2313,34.3225,16.3556,34.3225,44.7103
+		C515.295,232.1186,486.108,243.4361,452.0727,243.4361 M449.8871,79.7921h-11.6972v54.879h10.4608
+		c10.6458,0,26.2372-3.6849,26.2372-27.0501C474.8878,89.44,467.7566,79.7921,449.8871,79.7921 M450.3593,157.7005h-12.1694v61.5868
+		h15.2126c11.6964,0,27.2878-5.0868,27.2878-28.5493C480.6902,166.8762,470.0396,157.7005,450.3593,157.7005"/>
+</g>
+<sodipodi:namedview  bordercolor="#666666" borderopacity="1.0" height="300px" id="base" inkscape:current-layer="svgLineaMetRo" inkscape:cx="225" inkscape:cy="150" inkscape:document-units="px" inkscape:pageopacity="0.0" inkscape:pageshadow="2" inkscape:window-height="749" inkscape:window-maximized="1" inkscape:window-width="1280" inkscape:window-x="0" inkscape:window-y="27" inkscape:zoom="1" pagecolor="#ffffff" showgrid="false" width="430px">
+	</sodipodi:namedview>
+</svg>

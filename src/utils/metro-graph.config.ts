@@ -32,8 +32,8 @@ export const METRO_GRAPH_CONFIG: MetroGraphConfig = {
                 'background-color': (cy: cytoscape.NodeSingular) =>{
                     return getNodeBgColor(cy.data('lineType'))
                 },
-                'width': '45px',
-                'height': '45px',
+                'width': '35px',
+                'height': '35px',
                 'border-width': '2px',
                 'border-color': 'white',
                 'color': '#fff',
@@ -43,7 +43,7 @@ export const METRO_GRAPH_CONFIG: MetroGraphConfig = {
         {
             selector: 'edge',
             css: {
-                'width': "20px",
+                'width': "10px",
                 'line-color': (cy: cytoscape.EdgeSingular) =>{
                     return getEdgeColor(cy.data('lineId'))
                 },

@@ -1,3 +1,4 @@
+@use "../../assets/scss/variables.scss" as variables;
 .graph-metro{
-    background: #110702;
+    background: variables.$pure-brown;
 }

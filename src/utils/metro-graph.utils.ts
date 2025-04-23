@@ -1,6 +1,6 @@
 import { MetroData, MetroStop } from "../models/metro-data.model";
 
-const SCALE = 20000;
+const SCALE = 30000;
 
 function projectCoordinates(lat: number, lon: number) {
   return {
@@ -87,19 +87,19 @@ export function mapDataElements(data: MetroData | null) {
 export const NODE_COLORS = {
     A: {
         DARK: '#ee872a',
-        LIGHT: '#f5a76c',
+        LIGHT: '#f36c21',
     },
     B: {
         DARK: '#076b9e',
-        LIGHT: '#4a9bc7',
+        LIGHT: '#0071bb',
     }, 
     B1: {
         DARK: '#076b9e',
-        LIGHT: '#4a9bc7',
+        LIGHT: '#0071bb',
     },
     C: {
-        DARK: '#749d57',
-        LIGHT: '#a1c48a',
+        DARK: '#008751',
+        LIGHT: '#008751',
     },
     DEFAULT: {
         DARK: '#bbbbbb',

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store/rootReducer";
-import { getGraphMetro, setGraphMetroStop } from "./dashboard.actions";
+import { getGraphMetro, resetGraphMetroStop, setGraphMetroStop } from "./dashboard.actions";
 import { MetroStop } from "../../../models/metro-data.model";
 
 
@@ -20,10 +20,15 @@ export function useDashboardFacade() {
     dispatch(setGraphMetroStop(metroStop));
   }
 
+  const facadeResetMetroStop = () => {
+    dispatch(resetGraphMetroStop());
+  }
+
   return {
     graphMetro$,
     metroStop$,
     facadeGetGraphMetro,
-    facadeSetMetroStop
+    facadeSetMetroStop,
+    facadeResetMetroStop
   }
 }

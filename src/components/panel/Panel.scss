@@ -1,15 +1,32 @@
+@use "../../assets/scss/variables.scss" as variables;
 .panel{
+    border-top-left-radius: variables.$border-radius-1;
+    border-bottom-left-radius: variables.$border-radius-1;
+    background: variables.$pure-white;
 
+    z-index: variables.$z-index-2;
     &__header{
-        border: 1px solid #ccc;
+        // border: 1px solid #ccc;
+        &__line{
+            max-width: 3rem;
+            max-height: 1.5rem;
+        }
+    }
+
+    &__photo{
+     >img{
+        max-height: 15rem;
+        border-radius: variables.$border-radius-1;
+     }   
     }
 
     &__body{
-        border: 1px solid #ccc;
+        // border: 1px solid #ccc;
+       
     }
 
     &__footer{
-        border: 1px solid #ccc;
+        // border: 1px solid #ccc;
     }
 
 }

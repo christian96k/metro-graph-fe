@@ -1,6 +1,6 @@
 import { createReducer, PayloadAction, Reducer } from '@reduxjs/toolkit';
 import { DashboardState } from '../models/dashboard.model';
-import { getGraphMetroSuccess, setGraphMetroStop } from './dashboard.actions';
+import { getGraphMetroSuccess, resetGraphMetroStop, setGraphMetroStop } from './dashboard.actions';
 
 const initialState: DashboardState = {
   graph: null,
@@ -25,6 +25,14 @@ const dashBoardReducer: Reducer<DashboardState, PayloadAction<DashboardState>> =
     };
   });
 
+
+  // reset metro stop active
+  builder.addCase(resetGraphMetroStop, (state) => {
+    return{
+      ...state,
+      metroStop: initialState.metroStop
+    }
+  });
 });
 
 export default dashBoardReducer;

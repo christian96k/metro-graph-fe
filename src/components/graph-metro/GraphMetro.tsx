@@ -7,7 +7,7 @@ import { useDashboardFacade } from "../../pages/dashboard/store/dashboard.facade
 
 function GraphMetro() {
     const cyGraph = useRef<cytoscape.Core | null>(null);
-    const { graphMetro$, facadeSetMetroStop } = useDashboardFacade();
+    const { graphMetro$, metroStop$, facadeSetMetroStop, facadeResetMetroStop } = useDashboardFacade();
 
 
     // #region handle node selection
@@ -27,6 +27,12 @@ function GraphMetro() {
     const onNodeHoverOut = useCallback((event: cytoscape.EventObject) => {
         console.log("Node hovered out:", event.target.data('label'));
     },[]);
+
+    const onCanvasClick = useCallback((event: cytoscape.EventObject) => {
+        console.log("Canvas clicked:", event.target.data('label'));
+        if(metroStop$)
+            facadeResetMetroStop();
+    },[metroStop$]);
     // #endregion handle node selection
 
 
@@ -50,6 +56,9 @@ function GraphMetro() {
 
                     cy.off('click', 'node');
                     cy.on('click', 'node', onNodeClick);
+
+                    cy.off("tap");
+                    cy.on("tap", onCanvasClick);
 
                     cy.off('tapselect', 'node');
                     cy.on('tapselect', 'node', onNodeClick);

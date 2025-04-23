@@ -1,0 +1,61 @@
+@use "sass:map";
+@use "variables";
+
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 790px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 2400px,
+  2xl: 3700px,
+  3xl: 4000px
+);
+
+// Breakpoint variables
+$xs-breakpoint: getGridBreakpoint(xs);
+$sm-breakpoint: getGridBreakpoint(sm);
+$md-breakpoint: getGridBreakpoint(md);
+$lg-breakpoint: getGridBreakpoint(lg);
+$xl-breakpoint: getGridBreakpoint(xl);
+$xxl-breakpoint: getGridBreakpoint(xxl);
+$doubleXl-breakpoint: getGridBreakpoint(2xl);
+$tripleXl-breakpoint: getGridBreakpoint(3xl);
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1320px,
+  2xl: 2690px,
+  3xl: 3990px
+);
+
+
+// custom media-bnreakpoint since Bootstrap issue angular 17
+
+$custom-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 2180px,
+  xxl: 3400px,
+  xxxl: 5400px
+);
+
+@mixin custom-media-breakpoint-up($breakpoint) {
+  $breakpoint-value: map.get($custom-breakpoints, $breakpoint);
+  @media (min-width: $breakpoint-value) {
+    @content;
+  }
+}
+
+@mixin custom-media-breakpoint-down($breakpoint) {
+  $breakpoint-value: map.get($custom-breakpoints, $breakpoint);
+  @media (max-width: $breakpoint-value) {
+    @content;
+  }
+}

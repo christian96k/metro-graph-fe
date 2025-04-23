@@ -1,7 +1,25 @@
+@use "../../assets/scss/variables.scss" as variables;
+@use "../../assets/scss/viewport.scss" as viewport;
+
 .dashboard{
     height: 100dvh;
+
+    &__header{
+        top: 1rem;
+        z-index: 100;
+        >img {
+            max-width: 5.5rem;
+            max-height: 3.5rem;
+            @include viewport.custom-media-breakpoint-down(md){
+                max-width: 2.5rem;
+                max-height: 1.5rem;
+            }
+        }
+    }
+
     &__panel{
-        // border: 2px solid #ccc;
+        background: variables.$pure-brown;
+
     }
 
     &__graph{

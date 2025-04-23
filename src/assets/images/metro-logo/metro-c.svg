@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 21.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1"
+	 id="svgLineaMetRo" inkscape:version="0.47 r22583" sodipodi:docname="Metropolitana di Roma C.svg" sodipodi:version="0.32" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:svg="http://www.w3.org/2000/svg"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 604 299.6236"
+	 style="enable-background:new 0 0 604 299.6236;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;}
+	.st1{fill:#ee2926;}
+	.st2{fill:#008751;}
+</style>
+<title>Metro di Roma - Linea C</title>
+<sodipodi:namedview  bordercolor="#666666" borderopacity="1.0" height="300px" id="base" inkscape:current-layer="svgLineaMetRo" inkscape:cx="225" inkscape:cy="150" inkscape:document-units="px" inkscape:pageopacity="0.0" inkscape:pageshadow="2" inkscape:window-height="749" inkscape:window-maximized="1" inkscape:window-width="1280" inkscape:window-x="0" inkscape:window-y="27" inkscape:zoom="1" pagecolor="#ffffff" showgrid="false" width="430px">
+	</sodipodi:namedview>
+<g>
+	<g>
+		<polyline class="st0" points="301.9052,149.8811 301.9052,0 0,0 0,299.6942 302.0948,299.6942 		"/>
+		<g>
+			<path class="st1" d="M301.9052,299.6942H0V0h301.9052V299.6942z M222.7516,56.305h-36.2554l-35.5897,122.4308L115.5062,56.305
+				H79.1536L25.9108,243.4378h35.5889l36.445-123.2374l34.6422,123.1208h18.3197h18.3148l34.7393-123.1208l36.5381,123.2374h35.5889
+				L222.7516,56.305z"/>
+		</g>
+		<rect x="301.9052" class="st2" width="302.0948" height="299.6942"/>
+	</g>
+	<g>
+		<path class="st0" d="M499.126,236.6533c-7.877,4.2722-20.5938,9.0149-36.6345,9.0149c-37.7756,0-63.3073-27.4503-63.3073-95.2866
+			c0-74.4303,28.6652-94.6937,67.292-94.6937c12.056,0,25.0555,4.4123,33.5051,9.155l-8.4495,23.0177
+			c-9.0149-4.5329-16.61-7.1432-25.6241-7.1432c-17.6539,0-32.6498,9.2531-32.6498,68.9053
+			c0,62.5453,15.2826,70.9908,31.3232,70.9908c11.1036,0,19.5491-3.1546,27.5233-6.8565L499.126,236.6533z"/>
+	</g>
+</g>
+</svg>

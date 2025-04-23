@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 21.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1"
+	 id="svgLineaMetRo" inkscape:version="0.47 r22583" sodipodi:docname="Metropolitana di Roma B1.svg" sodipodi:version="0.32" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:svg="http://www.w3.org/2000/svg"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 604 299.6236"
+	 style="enable-background:new 0 0 604 299.6236;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;}
+	.st1{fill:#ee2926;}
+	.st2{fill:#0071bb;}
+</style>
+<title>Metro di Roma - Linea B1</title>
+<g>
+	<polyline class="st0" points="301.9002,0 0.0925,0 0.0925,299.5056 301.8078,299.5056 	"/>
+	<path class="st1" d="M301.9002,299.5056H0.0925V0h301.8077V299.5056L301.9002,299.5056z M222.9088,56.2285h-36.2154
+		l-35.7433,122.4343L115.5865,56.2285H79.1813L25.946,243.2568h35.6459l36.41-123.1245l34.6969,123.0038h18.2513h18.4411
+		l34.6977-123.0038l36.4052,123.1245h35.7424L222.9088,56.2285L222.9088,56.2285z"/>
+	<polygon class="st2" points="604,299.5786 301.9976,299.5786 301.9976,0 604,0 604,299.5786 	"/>
+	<path class="st0" d="M395.8188,243.3258h-48.0032V55.917h45.2485c35.8357,0,60.0783,15.2581,60.0783,49.8576
+		c0,23.4833-17.492,35.5778-28.3308,39.3351c12.9316,3.183,34.5071,16.3726,34.5071,44.6742
+		C459.3186,232.0879,429.9462,243.3258,395.8188,243.3258L395.8188,243.3258z M393.6335,79.6826h-11.5981v54.9193h10.3619
+		c10.649,0,26.4278-3.6843,26.4278-27.0411C418.8251,89.4507,411.695,79.6826,393.6335,79.6826L393.6335,79.6826z
+		 M394.3003,157.6568h-12.2649v61.5724h15.2094c11.8852,0,27.3769-5.086,27.3769-28.5644
+		C424.6217,166.8068,413.9776,157.6568,394.3003,157.6568L394.3003,157.6568z"/>
+	<polygon class="st0" points="567.7798,243.8271 567.7798,218.9218 542.3058,218.9218 542.3058,56.1555 508.5581,56.1555 
+		467.6858,81.1086 480.5193,103.3752 508.5581,86.2433 508.5581,218.9218 479.756,218.9218 479.756,243.8271 567.7798,243.8271 	"/>
+</g>
+<sodipodi:namedview  bordercolor="#666666" borderopacity="1.0" height="300px" id="base" inkscape:current-layer="svgLineaMetRo" inkscape:cx="225" inkscape:cy="150" inkscape:document-units="px" inkscape:pageopacity="0.0" inkscape:pageshadow="2" inkscape:window-height="749" inkscape:window-maximized="1" inkscape:window-width="1280" inkscape:window-x="0" inkscape:window-y="27" inkscape:zoom="1" pagecolor="#ffffff" showgrid="false" width="430px">
+	</sodipodi:namedview>
+</svg>
