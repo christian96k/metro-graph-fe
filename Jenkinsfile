@@ -4,9 +4,9 @@ pipeline {
     environment {
         IMAGE_NAME = 'metro-graph-frontend'
         IMAGE_TAG = 'latest'
-        REGISTRY = 'docker.io' // Docker Hub è il registry predefinito
         REGISTRY_CREDENTIALS = 'docker-hub-id' // Usa le credenziali Jenkins per Docker Hub
-        FULL_IMAGE_NAME = "${DOCKER_USERNAME}/${IMAGE_NAME}:${IMAGE_TAG}"  // Immagine con il nome utente Docker Hub
+        DOCKER_USERNAME = 'christian96k' // Nome utente Docker Hub
+        FULL_IMAGE_NAME = "${DOCKER_USERNAME}/${IMAGE_NAME}:${IMAGE_TAG}" // Non è necessario specificare docker.io
     }
 
     triggers {
