@@ -3,14 +3,11 @@ pipeline {
 
     environment {
         IMAGE_NAME = 'metro-graph-frontend'
-        IMAGE_TAG = 'latest'
+        IMAGE_TAG = 'latest'  // Usa il tag che vuoi, es. 'latest' o una versione
         REGISTRY = 'docker.io'
-        REGISTRY_CREDENTIALS = 'docker-hub-id'         // Credenziali Docker Hub
-        GITHUB_CREDENTIALS = 'github-id'               // Credenziali GitHub
-        VM_SSH_CREDENTIALS = 'ssh-id'                  // SSH key registrata su Jenkins (se necessario)
-        VM_IP = '64.227.68.251'                        // IP della VM
-        DOCKER_HUB_USERNAME = credentials('docker-hub-username')   // Username Docker Hub (credenziale Jenkins)
-        DOCKER_HUB_PASSWORD = credentials('docker-hub-password')   // Password Docker Hub (credenziale Jenkins)
+        REGISTRY_CREDENTIALS = 'docker-hub-username'  // Assicurati che queste siano corrette!
+        GITHUB_CREDENTIALS = 'github-id'
+        VM_IP = '64.227.68.251'  // IP della VM
     }
 
     stages {
@@ -20,36 +17,26 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
+        stage('Build and Push Docker Image') {
             steps {
                 script {
-                    docker.withRegistry("https://${REGISTRY}", REGISTRY_CREDENTIALS) {
-                        def appImage = docker.build("${IMAGE_NAME}:${IMAGE_TAG}")
-                        appImage.push()
+                    docker.withRegistry("https://${REGISTRY}", "${REGISTRY_CREDENTIALS}") {
+                        // Costruisci l'immagine Docker
+                        def appImage = docker.build("christian96k/${IMAGE_NAME}:${IMAGE_TAG}")
+                        // Fai il push dell'immagine al Docker Hub
+                        appImage.push("${IMAGE_TAG}")
                     }
                 }
             }
         }
 
-        stage('Login to Docker Hub') {
+        stage('Deploy on Remote VM via Docker Compose') {
             steps {
                 script {
-                    // Effettua il login a Docker Hub
+                    // Esegui il pull dell'immagine sulla macchina locale (dove gira Jenkins) e avvia con Docker Compose
                     sh """
-                        echo \$DOCKER_HUB_PASSWORD | docker login -u \$DOCKER_HUB_USERNAME --password-stdin
-                    """
-                }
-            }
-        }
-
-        stage('Deploy with Docker Compose') {
-            steps {
-                script {
-                    // Vai nella cartella con il docker-compose.yml
-                    sh """
-                        cd /home/root/dockerfiles && 
-                        docker-compose pull &&
-                        docker-compose up -d
+                        docker pull christian96k/${IMAGE_NAME}:${IMAGE_TAG}
+                        docker-compose -f /home/root/dockerfiles/docker-compose.yml up -d
                     """
                 }
             }
@@ -58,8 +45,10 @@ pipeline {
 
     post {
         always {
-            // Spostato il cleanWs all'interno del nodo
-            cleanWs() // Pulisce l'ambiente di lavoro dopo ogni esecuzione
+            // Pulisce l'ambiente di lavoro (necessario dentro un blocco node)
+            node {
+                cleanWs()
+            }
         }
     }
 }
