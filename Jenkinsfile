@@ -57,15 +57,14 @@ pipeline {
         stage('Deploy on Local VM via Docker Compose') {
             steps {
                 script {
-                    // Usa la directory montata per eseguire il docker-compose
                     sh """
-                        cd /mnt/dockerfiles &&
-                        docker pull ${FULL_IMAGE_NAME} &&
+                        cd /dockerfiles &&
                         docker-compose up -d
                     """
                 }
             }
         }
+
 
 
     }
