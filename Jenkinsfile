@@ -5,8 +5,9 @@ pipeline {
         IMAGE_NAME = 'metro-graph-frontend'
         IMAGE_TAG = 'latest'
         REGISTRY = 'docker.io'
-        REGISTRY_CREDENTIALS = 'docker-hub-id'
-        FULL_IMAGE_NAME = "${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}"
+        REGISTRY_CREDENTIALS = 'docker-hub-id'  // Usa le credenziali Jenkins per Docker Hub
+        DOCKER_USERNAME = 'christian96k'  // Il tuo nome utente Docker Hub
+        FULL_IMAGE_NAME = "${REGISTRY}/${DOCKER_USERNAME}/${IMAGE_NAME}:${IMAGE_TAG}"
     }
 
     triggers {
@@ -41,6 +42,11 @@ pipeline {
         stage('Tag & Push Image to Docker Hub') {
             steps {
                 script {
+                    // Login su Docker Hub con credenziali
+                    withCredentials([usernamePassword(credentialsId: REGISTRY_CREDENTIALS, usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                        sh "echo \$DOCKER_PASSWORD | docker login -u \$DOCKER_USERNAME --password-stdin https://docker.io"
+                    }
+
                     // Pusha l'immagine su Docker Hub solo se la build è riuscita
                     docker.withRegistry("https://${REGISTRY}", REGISTRY_CREDENTIALS) {
                         sh "docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${FULL_IMAGE_NAME}"
