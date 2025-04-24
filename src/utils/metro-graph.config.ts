@@ -1,5 +1,5 @@
 import cytoscape from "cytoscape";
-import { getEdgeColor, getNodeBgColor, NODE_COLORS } from "./metro-graph.utils";
+import { getEdgeColor, getNodeBgColor } from "./metro-graph.utils";
 export interface MetroGraphConfig {
     
     LAYOUT: cytoscape.LayoutOptions;

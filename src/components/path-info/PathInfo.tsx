@@ -9,7 +9,7 @@ export interface PathInfoProps {
     stops: {name: string; id: string}[];
 }
 
-function PathInfo( { distance, duration, from, to, stops }: PathInfoProps) {
+function PathInfo( { distance, duration, stops }: PathInfoProps) {
   return (
     <footer className="path-info bg-white box-shadow-top row align-items-center gap-2 p-2">
 
