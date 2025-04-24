@@ -9,7 +9,7 @@ import Header from "../../components/header/Header";
 
 function Dashboard() {
 
-  const graphDataFetch = useRef<Boolean>(false);
+  const graphDataFetch = useRef<boolean>(false);
   const { graphMetro$, metroStop$, facadeGetGraphMetro } = useDashboardFacade();
   const availableLines = useMemo(() => [IMAGES_PATH.MA, IMAGES_PATH.MB, IMAGES_PATH.MB1, IMAGES_PATH.MC], []);
 

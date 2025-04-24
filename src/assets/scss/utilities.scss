@@ -25,6 +25,9 @@
 
 
 // Font Size
+.font-size-8{
+    font-size: 8px;
+}
 .font-size-10{
     font-size: 10px;
 }
@@ -96,4 +99,27 @@
 }
 img.loaded + .loader-overlay {
     display: none;
+}
+
+// text styles
+.vertical-text {
+    writing-mode: vertical-rl; 
+    text-orientation: upright;
+}
+.vertical-text-reverse {
+    writing-mode: vertical-rl; 
+    text-orientation: upright;
+    transform: rotate(180deg);
+}
+.vertical-text-reverse-rtl {
+    writing-mode: vertical-rl; 
+    text-orientation: upright;
+    transform: rotate(180deg);
+    direction: rtl;
+}
+
+.diagonal-text {
+    transform: rotate(-25deg);
+    transform-origin: left top;
+    display: inline-block;
 }

@@ -14,7 +14,7 @@ export const METRO_UNIQUE_DATA: MetroData = {
       stop_lon: 12.50042,
       wheelchair_boarding: true,
       stop_main: false,
-      line_ids: ["MA", "MB", "MB1"],
+      line_ids: ["MA", "MB"],
     },
     {
       stop_id: "05016",

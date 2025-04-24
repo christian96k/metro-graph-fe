@@ -11,26 +11,25 @@ export interface PathInfoProps {
 
 function PathInfo( { distance, duration, stops }: PathInfoProps) {
   return (
-    <footer className="path-info bg-white box-shadow-top row align-items-center gap-2 p-2">
+    <footer className="path-info box-shadow-top row align-items-center p-2">
 
 
-        <div className="path-info__stops col-12">
-            <h6 className="mb-0">{'Fermate'}</h6>
-            <ul className="list-unstyled d-flex ">
+        <div className="path-info__stops col-12 px-0">
+            <ul className="list-unstyled d-flex px-2 pt-3 pt-md-4 pb-1 gap-4 m-0">
                 {stops.map((stop, index) => (
-                    <li key={index} className="path-info__stops__item d-flex justify-content-between align-items-center">
-                        <span className="font-size-10">{stop.name}</span>
+                    <li key={index} className="path-info__stops__item w-25 position-relative d-flex justify-content-between align-items-center d-flex diagonal-text">
+                        <span className="font-size-8">  {stop.name.replace(/\s*\(.*?\)\s*/g, '').trim()}</span>
                         {/* <span className="font-size-12">{stop.id}</span> */}
+                        <marker className="position-absolute">°</marker> 
                     </li>
                 ))}
             </ul>
         </div>
 
-        <div className="path-info__distance col-12 d-flex justify-content-between align-items-center">
-            <h6 className="mb-0">{distance} {'km'}</h6>
-            {/* <p className="font-size-12 text-muted">{duration ?? ''}</p> */}
+        <div className="path-info__distance col-12  px-0 d-none justify-content-between align-items-center">
+            <p className="mb-0">{distance} {'km'}</p>
             <div className="path-info__duration">
-                <h6 className="mb-0">{duration} {'min'}</h6>
+                <p className="mb-0">{duration} {'min'}</p>
             </div>
         </div>
 

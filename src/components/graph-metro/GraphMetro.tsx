@@ -120,7 +120,7 @@ function GraphMetro() {
                 }}
             />
 
-            {pathInfo.pathDistance && 
+            {pathInfo.pathDistance && !metroStop$ &&
                 <div className="graph-metro__distance-path w-100 position-absolute d-flex justify-content-center align-items-center">
                     <PathInfo distance={pathInfo.pathDistance} duration={pathInfo.duration} stops={pathInfo.stops} from={pathInfo.from} to={pathInfo.to}/>
                 </div>

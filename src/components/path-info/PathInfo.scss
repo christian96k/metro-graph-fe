@@ -5,9 +5,27 @@
 .path-info{
     border-top-left-radius: variables.$border-radius-1;
     border-top-right-radius: variables.$border-radius-1;
-    width: 45dvw;
+    width: 100dvw;
+    // background: #1c1c1c;
+    background-color: variables.$pure-white;
+    border-top: 1px solid;
+    border-left: 1px solid;
+    border-right: 1px solid;
+    box-shadow: 0 7px 15px rgba(87, 86, 86, 0.3);
+    box-shadow: -7px 0 15px rgba(87, 86, 86, 0.3), 7px 0 15px rgba(87, 86, 86, 0.3);
+
     @include viewport.custom-media-breakpoint-down(md){
         width: 100dvw;
+    }
+    
+    &__stops{
+        overflow: auto;
+        marker{
+            left: -10px;
+            bottom: 1px;
+            font-size: 18px;
+        }
+
     }
 
 }

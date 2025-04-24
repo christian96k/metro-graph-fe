@@ -1,13 +1,5 @@
 @use "../../assets/scss/variables.scss" as variables;
 .graph-metro {
-    background: variables.$pure-brown;
-    background-image: 
-        linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.89)), 
-        url("../../assets/images/utils/main-background.webp");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-
     &__distance-path{
         bottom:0;
     }
