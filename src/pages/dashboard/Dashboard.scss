@@ -7,7 +7,7 @@
     &__header{
         top: 1rem;
         @include viewport.custom-media-breakpoint-down(md){
-            top: 4.5rem;
+            top: 5rem;
         }
 
         z-index: 100;
@@ -22,8 +22,11 @@
     }
 
     &__panel{
-        background: variables.$pure-black;
+        // background: variables.$pure-black;
         z-index: variables.$z-index-2;
+        // @include viewport.custom-media-breakpoint-down(md){
+        //     height: 40dvh!important;
+        // }
     }
 
     &__graph{

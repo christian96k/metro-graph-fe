@@ -1,5 +1,5 @@
 import cytoscape from "cytoscape";
-import { getEdgeColor, getNodeBgColor } from "./metro-graph.utils";
+import { getEdgeColor, getNodeBgColor, NODE_COLORS } from "./metro-graph.utils";
 export interface MetroGraphConfig {
     
     LAYOUT: cytoscape.LayoutOptions;
@@ -32,8 +32,8 @@ export const METRO_GRAPH_CONFIG: MetroGraphConfig = {
                 'background-color': (cy: cytoscape.NodeSingular) =>{
                     return getNodeBgColor(cy.data('lineType'))
                 },
-                'width': '35px',
-                'height': '35px',
+                'width': '55px',
+                'height': '55px',
                 'border-width': '2px',
                 'border-color': 'white',
                 'color': '#fff',
@@ -43,14 +43,24 @@ export const METRO_GRAPH_CONFIG: MetroGraphConfig = {
         {
             selector: 'edge',
             css: {
-                'width': "10px",
+                'width': "20px",
                 'line-color': (cy: cytoscape.EdgeSingular) =>{
                     return getEdgeColor(cy.data('lineId'))
                 },
                 'target-arrow-color': '#ccc',
                 'target-arrow-shape': 'none'
             }
-        }
+        },
+        // hidden path
+        {
+            selector: '.hidden-path',
+            css: {
+             
+              'transition-property': 'background-color, line-color',
+              'transition-duration': 0.5,
+              'opacity': 0.1,
+            }
+          }
     ],
     VIEW:{
         WIDTH:"100%",

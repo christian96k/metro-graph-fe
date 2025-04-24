@@ -2,22 +2,67 @@ import { METRO_GRAPH_CONFIG } from "../../utils/metro-graph.config";
 import { mapDataElements } from "../../utils/metro-graph.utils";
 import CytoscapeComponent from "react-cytoscapejs";
 import "./GraphMetro.scss";
-import { useCallback, useRef } from "react";
+import { useCallback, useRef, useState } from "react";
 import { useDashboardFacade } from "../../pages/dashboard/store/dashboard.facade";
+import cytoscape from 'cytoscape';
+import { useShortestPath } from "../../hooks/useShortestPath";
+import PathInfo from "../path-info/PathInfo";
 
 function GraphMetro() {
     const cyGraph = useRef<cytoscape.Core | null>(null);
-    const { graphMetro$, metroStop$, facadeSetMetroStop, facadeResetMetroStop } = useDashboardFacade();
+    const { graphMetro$, metroStop$, metroPath$, facadeSetMetroStop, facadeResetMetroStop } = useDashboardFacade();
+    const [ pathInfo, setPathInfo ]  = useState<{ pathDistance: string, 
+        duration:string, 
+        from: {name: string, id: string}, 
+        to: {name:string, id:string},
+        stops: {name: string, id: string}[]}>({
+        pathDistance: '',
+        duration: '0',
+        from: {name: '', id: ''},
+        to: {name: '', id: ''},
+        stops: [],
+    });
+
+    //#region calculate path
+    useShortestPath({
+        cy: cyGraph.current,
+        metroPath: metroPath$,
+        useEuclidean: true,
+        onPathFound: (pathDistance, duration, from, to, stops) => {
+            setPathInfo(
+                {
+                    pathDistance,
+                    duration,
+                    from,
+                    to,
+                    stops,
+                }
+            );
+        },
+    });
+      
+    //#endregion calculate path
 
 
     // #region handle node selection
     const onNodeClick = useCallback((event: cytoscape.EventObject) => {
         console.log("Node selected:", event.target.data('label'));
-        if(graphMetro$){
-            const activeMetroStop  = graphMetro$?.metro_stops.find((stop) => stop.stop_id === event.target.data('id'));
-            if(activeMetroStop)
-                facadeSetMetroStop(activeMetroStop);
-        } 
+        if (cyGraph.current) {
+            const selectedNode = cyGraph.current.$(`#${event.target.id()}`);
+            if(selectedNode.hasClass('hidden-path')) return;
+            
+            cyGraph.current.animate({
+                fit: { eles: selectedNode, padding: 50 },
+                duration: 600,
+                easing: 'ease-in-out',
+            });
+            if(graphMetro$){
+                const activeMetroStop  = graphMetro$?.metro_stops.find((stop) => stop.stop_id === event.target.data('id'));
+                if(activeMetroStop)
+                    facadeSetMetroStop(activeMetroStop);
+                
+            } 
+        }
     },[]);
 
     const onNodeHover = useCallback((event: cytoscape.EventObject) => {
@@ -29,10 +74,13 @@ function GraphMetro() {
     },[]);
 
     const onCanvasClick = useCallback((event: cytoscape.EventObject) => {
-        console.log("Canvas clicked:", event.target.data('label'));
-        if(metroStop$)
-            facadeResetMetroStop();
-    },[metroStop$]);
+        if (!event.target || event.target === cyGraph.current) {
+            console.log("Canvas clicked, no node selected.");
+            if (metroStop$) {
+                facadeResetMetroStop();
+            }
+        }
+    }, [metroStop$]);
     // #endregion handle node selection
 
 
@@ -54,8 +102,8 @@ function GraphMetro() {
                 cy={(cy)=>{
                     cyGraph.current = cy;
 
-                    cy.off('click', 'node');
-                    cy.on('click', 'node', onNodeClick);
+                    // cy.off('click', 'node');
+                    // cy.on('click', 'node', onNodeClick);
 
                     cy.off("tap");
                     cy.on("tap", onCanvasClick);
@@ -71,6 +119,12 @@ function GraphMetro() {
 
                 }}
             />
+
+            {pathInfo.pathDistance && 
+                <div className="graph-metro__distance-path w-100 position-absolute d-flex justify-content-center align-items-center">
+                    <PathInfo distance={pathInfo.pathDistance} duration={pathInfo.duration} stops={pathInfo.stops} from={pathInfo.from} to={pathInfo.to}/>
+                </div>
+            }
         </section>
     )
 }

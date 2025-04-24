@@ -17,11 +17,14 @@ const Panel: React.FC<PanelProps> = ({ data }) => {
                 {/* HEADER */}
                 <div className="panel__header d-flex justify-content-between align-items-center">
                     <h5 className="mb-0">{data?.stop_name}</h5>
-                    {data?.line_ids.map((lineId, index) => {
-                        return (
-                            <img key={index} className={`panel__header__line xs-img ${lineId}`} src={IMAGES_PATH[lineId as keyof typeof IMAGES_PATH]} />
-                        )
-                    })}
+                    <div className="w-25 d-flex justify-content-end align-items-center gap-1">
+                        {data?.line_ids.map((lineId, index) => {
+                            return (
+                                <img key={index} className={`panel__header__line xs-img ${lineId}`} src={IMAGES_PATH[lineId as keyof typeof IMAGES_PATH]} />
+                            )
+                        })}
+                    </div>
+                   
                 </div>
 
                 {/* PHOTO */}

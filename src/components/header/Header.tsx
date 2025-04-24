@@ -4,7 +4,7 @@ import { useDashboardFacade } from "../../pages/dashboard/store/dashboard.facade
 import { useCallback, useRef, useState } from "react";
 
 function Header() {
-  const { graphMetro$ } = useDashboardFacade();
+  const { graphMetro$, facadeSearchMetroPath, facadeResetMetroPath, facadeResetMetroStop } = useDashboardFacade();
 
   const [searchFrom, setSearchFrom] = useState<{name:string, id:string}>({name:'', id:''});
   const [searchTo, setSearchTo] = useState<{name:string, id:string}>({name:'', id:''});
@@ -38,19 +38,23 @@ function Header() {
   );
 
   const onPathSearch = useCallback(() => {
-    if (searchFrom&& searchTo) {
-      console.log('FROM:', searchFrom);
-      console.log('TO:', searchTo);
-    } else {
-      // TODO: error handling
-      alert('Seleziona una fermata di partenza e una di arrivo!');
+    if (searchFrom && searchTo) {
+      facadeSearchMetroPath({from: searchFrom, to: searchTo});
+      facadeResetMetroStop();
     }
-  },[searchFrom, searchTo]); 
+  },[searchFrom, searchTo]);
   
+  const onPathReset = useCallback(() => {
+    setSearchFrom({name: '', id: ''});
+    setSearchTo({name: '', id: ''});
+    if (inputFromRef.current) inputFromRef.current.value = '';
+    if (inputToRef.current) inputToRef.current.value = '';
+    facadeResetMetroPath();
+  },[searchFrom, searchTo]);
 
   return (
-    <header className="header d-flex align-items-center justify-content-between gap-4 px-3 py-2 py-md-2">
-      <div className="logo d-flex align-items-center justify-content-center box-shadow">{'C'}</div>
+    <header className="header d-flex align-items-center justify-content-between gap-2 gap-md-4 px-2 px-md-3 py-2 py-md-2">
+      {/* <div className="logo d-flex align-items-center justify-content-center box-shadow">{'C'}</div> */}
       <div className="header__fields-search d-flex gap-2 position-relative">
         <div className="position-relative w-100">
           <input
@@ -107,8 +111,10 @@ function Header() {
 
       </div>
 
-      <div className="header__action">
+      <div className="header__action d-flex ">
         <span role="button" className={`font-size-18 ${!searchFrom.id || !searchTo.id ? 'disabled-element' : ''} `} aria-label="Search" onClick={onPathSearch}>🔍</span>
+        <span role="button" className={`font-size-18 ${searchFrom.id || searchTo.id ? '' : 'disabled-element'} `} aria-label="Reset" onClick={onPathReset}>🔄</span>
+      
       </div>
     </header>
   );

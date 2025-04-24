@@ -7,7 +7,6 @@ export interface SuggestionsProps {
 }
 
 function Suggestions({ list, onSelect, searchValue }: SuggestionsProps) {
-    console.log(searchValue);
   return (
     <ul
         className="suggestions position-absolute bg-white shadow p-1 w-100 list-unstyled"

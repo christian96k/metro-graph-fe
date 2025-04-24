@@ -1,0 +1,13 @@
+@use "../../assets/scss/variables.scss" as variables;
+@use "../../assets/scss/viewport.scss" as viewport;
+
+
+.path-info{
+    border-top-left-radius: variables.$border-radius-1;
+    border-top-right-radius: variables.$border-radius-1;
+    width: 45dvw;
+    @include viewport.custom-media-breakpoint-down(md){
+        width: 100dvw;
+    }
+
+}

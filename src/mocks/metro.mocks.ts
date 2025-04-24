@@ -8,13 +8,13 @@ export const METRO_UNIQUE_DATA: MetroData = {
     {
       stop_id: "05000",
       stop_code: "05000",
-      stop_name: "TERMINI (MA-MB-FS)",
+      stop_name: "TERMINI (MA-MB)",
       stop_description: "Quando fu inaugurata, il 9 febbraio 1955, Termini era il capolinea dell'unico tratto di linea metropolitana di Roma, che collegava la stazione ferroviaria con il quartiere EUR. Facevano capolinea a Termini anche i treni diretti al Lido di Ostia, l'attuale Ferrovia Roma-Lido, con frequenza di due convogli ogni ora. All'epoca i binari dell'attuale stazione della linea B erano dedicati uno per la metropolitana Termini-Laurentina, attualmente banchina in direzione Laurentina, l'altro per i rapidi Termini-Lido. Lo smistamento dei treni era regolato da due scambi posti dove oggi termina la stazione, lato Cavour, e controllati da una sala comandi (poi demolita) posta vicino alla banchina in direzione Laurentina. Nel 1980 divenne il nodo di scambio con la nuova linea A. Il capolinea di allora della linea B subì modifiche: proprio sopra la linea A venne creato uno spazio per la linea B (oggi occupato dalle banchine nuove in direzione Cavour) ed ancora più sopra da un nuovo atrio di ingresso. Dal 1987 i treni da Ostia non raggiungono più Termini, bensì terminano la corsa alla stazione Porta San Paolo, adiacente alla fermata Piramide. Pochi anni dopo, nel 1990, aprì al pubblico il prolungamento della linea B fino a Rebibbia. Ciò comportò lo spostamento di alcuni metri delle banchine verso la stazione Cavour, in quanto la costruzione delle nuove gallerie dovette avvenire a maggiore profondità rispetto al resto della linea. Tutt'oggi è possibile osservare parte della stazione originaria guardando in direzione Rebibbia, al termine delle attuali banchine.",
       stop_lat: 41.901297,
       stop_lon: 12.50042,
       wheelchair_boarding: true,
       stop_main: false,
-      line_ids: ["MA", "MB", "FS"],
+      line_ids: ["MA", "MB", "MB1"],
     },
     {
       stop_id: "05016",

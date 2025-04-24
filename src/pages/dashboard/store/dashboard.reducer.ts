@@ -1,10 +1,11 @@
 import { createReducer, PayloadAction, Reducer } from '@reduxjs/toolkit';
 import { DashboardState } from '../models/dashboard.model';
-import { getGraphMetroSuccess, resetGraphMetroStop, setGraphMetroStop } from './dashboard.actions';
+import { getGraphMetroSuccess, resetGraphMetroStop, resetMetroPath, searchMetroPath, setGraphMetroStop } from './dashboard.actions';
 
 const initialState: DashboardState = {
   graph: null,
-  metroStop: null
+  metroStop: null,
+  metroPath: null
 }
 
 const dashBoardReducer: Reducer<DashboardState, PayloadAction<DashboardState>> = createReducer(initialState, (builder) => {
@@ -23,6 +24,27 @@ const dashBoardReducer: Reducer<DashboardState, PayloadAction<DashboardState>> =
       ...state,
       metroStop: action.payload
     };
+  });
+
+
+  // search metro path
+  builder.addCase(searchMetroPath, (state, action) => {
+    return {
+      ...state,
+      metroPath: action.payload
+    };
+  });
+
+  // reset metro path
+  builder.addCase(resetMetroPath, (state) => {
+    return{
+      ...state,
+      metroPath: {
+        from: {name: '', id: ''},
+        to: {name: '', id: ''}
+      },
+      metroStop: initialState.metroStop
+    }
   });
 
 
