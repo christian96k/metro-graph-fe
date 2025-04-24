@@ -6,10 +6,14 @@
 
     &__header{
         top: 1rem;
+        @include viewport.custom-media-breakpoint-down(md){
+            top: 4.5rem;
+        }
+
         z-index: 100;
         >img {
-            max-width: 5.5rem;
-            max-height: 3.5rem;
+            max-width: 4rem;
+            max-height: 3rem;
             @include viewport.custom-media-breakpoint-down(md){
                 max-width: 2.5rem;
                 max-height: 1.5rem;
@@ -18,10 +22,8 @@
     }
 
     &__panel{
-        background: variables.$pure-brown;
+        background: variables.$pure-black;
         z-index: variables.$z-index-2;
-
-
     }
 
     &__graph{

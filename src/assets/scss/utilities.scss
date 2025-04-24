@@ -42,11 +42,34 @@
 }
 
 
+
+// box shadows
+.box-shadow{
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.box-shadow-start{
+    box-shadow: -7px 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.box-shadow-end{
+    box-shadow: 7px 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.box-shadow-top{
+    box-shadow: 0 -7px 15px rgba(0, 0, 0, 0.3);
+}
+
+.box-shadow-bottom{
+    box-shadow: 0 7px 15px rgba(0, 0, 0, 0.3);
+}
+
+
 // disabled elements
 .disabled-element {
     pointer-events: none !important;
     opacity: 0.4 !important;
-    background-color: variables.$pure-gray !important;
+    // background-color: variables.$pure-gray !important;
 }
 
 

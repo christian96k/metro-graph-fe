@@ -1,0 +1,50 @@
+@use "./variables" as variables;
+
+// ---- inputs ----
+
+input[type="checkbox"] {
+    cursor: pointer;
+}
+  
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="checkbox"]:focus,
+input[type="radio"]:focus,
+input[type="switch"]:focus,
+input[type="email"]:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: variables.$pure-gray;
+}
+  
+input[type="checkbox"].form-check-input {
+    border-color: variables.$pure-gray;
+
+    &:checked {
+        border-color: variables.$pure-gray;
+    }
+  }
+  
+input[type="text"],
+input[type="username"],
+input[type="password"],
+input[type="number"],
+input[type="email"]{
+    border-radius: variables.$border-radius-1;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    font-size: 14px;
+}
+  
+::placeholder{
+    font-size: 12px!important;
+    letter-spacing: 0.156px;
+    color: variables.$pure-gray;
+}
+
+textarea:focus,
+textarea:active,
+textarea:hover {
+    box-shadow: none !important;
+}

@@ -5,6 +5,7 @@ import { useDashboardFacade } from './store/dashboard.facade';
 import Loader from "../../components/loader/Loader";
 import Panel from "../../components/panel/Panel";
 import { IMAGES_PATH } from "../../core/constants/images.path";
+import Header from "../../components/header/Header";
 
 function Dashboard() {
 
@@ -20,28 +21,31 @@ function Dashboard() {
   },[])
 
   return (
-    <section className="dashboard container-fluid row m-0 p-0">
-      {/* HEADER */}
-      <div className="dashboard__header position-absolute d-flex flex-column gap-2 w-50">
-        {availableLines.map((line, index) =>
-          <img key={index} className="img-fluid" src={line} alt="" />
-        )}
-      </div>  
+    <>
+      <Header/>
+      <section className="dashboard container-fluid row m-0 p-0">
+        {/* HEADER */}
+        <div className="dashboard__header position-absolute d-flex flex-column gap-2 w-50">
+          {availableLines.map((line, index) =>
+            <img key={index} className="img-fluid" src={line} alt="" />
+          )}
+        </div>  
 
-      {/* GRAPH METRO */}
-      <div className={`dashboard__graph col-12  ${metroStop$ ? 'col-sm-9 h-25' : ''} px-0`}>
-        {graphMetro$ ? 
-          <GraphMetro/> : <Loader/> 
-        }
-      </div>
-
-      {/* PANEL */}
-      {metroStop$ && 
-        <div className={`dashboard__panel col-12 ${metroStop$ ? 'col-sm-3 ' : ''}  p-0`}>
-          <Panel data={metroStop$}/>
+        {/* GRAPH METRO */}
+        <div className={`dashboard__graph col-12  ${metroStop$ ? 'col-sm-9 h-25' : ''} px-0`}>
+          {graphMetro$ ? 
+            <GraphMetro/> : <Loader/> 
+          }
         </div>
-      }
-    </section>
+
+        {/* PANEL */}
+        {metroStop$ && 
+          <div className={`dashboard__panel col-12 ${metroStop$ ? 'col-sm-3 ' : ''}  p-0`}>
+            <Panel data={metroStop$}/>
+          </div>
+        }
+      </section>
+    </>
   )
 }
 

@@ -1,7 +1,4 @@
 // base colors
-
-$pure-white : #ffffff;
-$pure-black : #000000;
 $pure-gray : #808080;
 $pure-red : #ff0000;
 $pure-green : #00ff00;
@@ -9,11 +6,15 @@ $pure-blue : #0000ff;
 $pure-yellow : #ffff00;
 $pure-brown : #1f1717;
 
+// dark colors
+$dark-gray : #333333;
+
 // primary colors
 $pure-white : #ffffff;
 $pure-black : #000000;
 
 // z-index
+$z-index-0 : 0;
 $z-index-1 : 100;
 $z-index-2 : 200;
 $z-index-3 : 300;

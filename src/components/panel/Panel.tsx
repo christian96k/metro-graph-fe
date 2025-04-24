@@ -10,13 +10,13 @@ export interface PanelProps {
 const Panel: React.FC<PanelProps> = ({ data }) => {
 
     return (
-        <section className="panel d-flex flex-column justify-content-between h-100 p-2 p-md-3">
+        <section className="panel box-shadow-start d-flex flex-column justify-content-between h-100 p-2 p-md-3">
 
             <section className="top">
 
                 {/* HEADER */}
                 <div className="panel__header d-flex justify-content-between align-items-center">
-                    <h4>{data?.stop_name}</h4>
+                    <h5 className="mb-0">{data?.stop_name}</h5>
                     {data?.line_ids.map((lineId, index) => {
                         return (
                             <img key={index} className={`panel__header__line xs-img ${lineId}`} src={IMAGES_PATH[lineId as keyof typeof IMAGES_PATH]} />
