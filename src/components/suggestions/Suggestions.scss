@@ -1,7 +1,7 @@
 @use '../../assets/scss/variables.scss' as variables;
 
 .suggestions{
-    z-index: variables.$z-index-0;
+    z-index: variables.$z-index-1;
     left: 0;
     top: 118%;
     border-bottom-left-radius: variables.$border-radius-1;

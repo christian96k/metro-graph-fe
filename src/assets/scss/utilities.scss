@@ -22,6 +22,11 @@
     max-height: 1.5rem;
 }
 
+.xxs-img{
+    max-width: 1.2rem;
+    max-height: 1.2rem;
+}
+
 
 
 // Font Size
@@ -122,4 +127,33 @@ img.loaded + .loader-overlay {
     transform: rotate(-25deg);
     transform-origin: left top;
     display: inline-block;
+}
+
+// cursors styles
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.cursor-not-allowed {
+    cursor: not-allowed;
+}
+
+.cursor-grabbing {
+    cursor: grabbing;
+}
+
+.cursor-grab {
+    cursor: grab;
+}
+
+.cursor-move {
+    cursor: move;
+}
+
+.cursor-text {
+    cursor: text;
+}
+
+.cursor-crosshair {
+    cursor: crosshair;
 }

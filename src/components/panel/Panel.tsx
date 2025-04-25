@@ -10,14 +10,14 @@ export interface PanelProps {
 const Panel: React.FC<PanelProps> = ({ data }) => {
 
     return (
-        <section className="panel box-shadow-start d-flex flex-column justify-content-between h-100 p-2 p-md-3">
+        <section className="panel box-shadow-start d-flex flex-column justify-content-between h-100 p-0">
 
             <section className="top">
 
                 {/* HEADER */}
-                <div className="panel__header d-flex justify-content-between align-items-center">
-                    <h5 className="mb-0">{data?.stop_name}</h5>
-                    <div className="w-25 d-flex justify-content-end align-items-center gap-1">
+                <div className="panel__header d-flex justify-content-between align-items-center p-2">
+                    <h5 className="">{data?.stop_name}</h5>
+                    <div className="w-25 d-flex justify-content-end align-items-center gap-1 ">
                         {data?.line_ids.map((lineId, index) => {
                             return (
                                 <img key={index} className={`panel__header__line xs-img ${lineId}`} src={IMAGES_PATH[lineId as keyof typeof IMAGES_PATH]} />
@@ -28,7 +28,7 @@ const Panel: React.FC<PanelProps> = ({ data }) => {
                 </div>
 
                 {/* PHOTO */}
-                <div className="panel__photo mt-2 mt-md-3 text-center" style={{ minHeight: '15rem', position: 'relative' }}>
+                <div className="panel__photo p-2 p-md-3 text-center" style={{ minHeight: '15rem', position: 'relative' }}>
                     <img
                         src={IMAGES_PATH[data?.stop_id as keyof typeof IMAGES_PATH]}
                         alt={data?.stop_name ?? 'station-image-metro'}
@@ -44,7 +44,7 @@ const Panel: React.FC<PanelProps> = ({ data }) => {
 
 
                 {/* BODY */}
-                <div className="panel__body mt-2 mt-md-3">
+                <div className="panel__body p-2 p-md-3">
                     <h5>{'Dettagli'}</h5>
                 
 
@@ -58,7 +58,7 @@ const Panel: React.FC<PanelProps> = ({ data }) => {
             </section>
 
             {/* FOOTER */}
-            <div className="panel__footer mt-2 mt-md-3">
+            <div className="panel__footer p-2 p-md-3">
                 <h5 >{'Servizi'}</h5>
                 <div className="panel__body__item d-flex flex-column my-2">
                     <img className={`xs-img ${data?.wheelchair_boarding ? '' : 'disabled-element'}`} src={IMAGES_PATH.WCHAIR} alt="" />

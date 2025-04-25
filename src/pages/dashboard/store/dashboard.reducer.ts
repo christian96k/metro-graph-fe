@@ -40,8 +40,8 @@ const dashBoardReducer: Reducer<DashboardState, PayloadAction<DashboardState>> =
     return{
       ...state,
       metroPath: {
-        from: {name: '', id: ''},
-        to: {name: '', id: ''}
+        from: {name: '', id: '', lineIds: []},
+        to: {name: '', id: '', lineIds: []},
       },
       metroStop: initialState.metroStop
     }

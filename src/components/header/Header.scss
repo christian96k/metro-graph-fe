@@ -6,13 +6,12 @@
     position: absolute;
     top: 0;
     left: 50%;
-    width: 40dvw;
+    width: 48dvw;
     transform: translateX(-50%);
     z-index: variables.$z-index-2;
     background-color: variables.$pure-white;
     box-shadow: 0 7px 15px rgba(87, 86, 86, 0.3);
-    border-bottom-left-radius: variables.$border-radius-1;
-    border-bottom-right-radius: variables.$border-radius-1;
+  
     @include viewport.custom-media-breakpoint-down(md){
         width: 100dvw;
     }
@@ -21,5 +20,14 @@
         width: 2rem;
         height: 2rem;
         border: 1px solid variables.$pure-gray;
+    }
+
+
+    &__label{
+        top:100%;
+        left: 0;
+        background-color: variables.$dark-gray;
+        border-bottom-left-radius: variables.$border-radius-1;
+        border-bottom-right-radius: variables.$border-radius-1;
     }
 }

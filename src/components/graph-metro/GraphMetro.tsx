@@ -13,13 +13,13 @@ function GraphMetro() {
     const { graphMetro$, metroStop$, metroPath$, facadeSetMetroStop, facadeResetMetroStop } = useDashboardFacade();
     const [ pathInfo, setPathInfo ]  = useState<{ pathDistance: string, 
         duration:string, 
-        from: {name: string, id: string}, 
-        to: {name:string, id:string},
-        stops: {name: string, id: string}[]}>({
+        from: {name: string, id:string, lineIds?: string[]}, 
+        to: {name:string, id:string, lineIds?: string[]},
+        stops: {name: string, id:string, lineIds?: string[], }[]}>({
         pathDistance: '',
         duration: '0',
-        from: {name: '', id: ''},
-        to: {name: '', id: ''},
+        from: {name: '', id: '', lineIds: []},
+        to: {name: '', id: '', lineIds: []},
         stops: [],
     });
 
@@ -122,7 +122,7 @@ function GraphMetro() {
 
             {pathInfo.pathDistance && !metroStop$ &&
                 <div className="graph-metro__distance-path w-100 position-absolute d-flex justify-content-center align-items-center">
-                    <PathInfo distance={pathInfo.pathDistance} duration={pathInfo.duration} stops={pathInfo.stops} from={pathInfo.from} to={pathInfo.to}/>
+                    <PathInfo distance={pathInfo.pathDistance} duration={pathInfo.duration} stops={pathInfo.stops} from={pathInfo.from} to={pathInfo.to} />
                 </div>
             }
         </section>

@@ -1,11 +1,9 @@
 import { useEffect, useRef } from "react";
 import { Core, EdgeSingular } from "cytoscape";
 import { haversineDistance } from "../utils/metro-graph.utils";
+import { MetroPath } from "../pages/dashboard/models/dashboard.model";
 
-export interface MetroPath {
-  from: { name: string; id: string };
-  to: { name: string; id: string };
-}
+
 
 export interface UseShortestPathOptions {
   cy: Core | null;
@@ -14,9 +12,9 @@ export interface UseShortestPathOptions {
   onPathFound?: (
         pathDistance: string, 
         duration:string, 
-        from: {name: string, id: string}, 
-        to: {name:string, id:string},
-        stops: {name: string, id: string}[]
+        from: {name: string, id: string, lineIds?: string[]}, 
+        to: {name:string, id:string, lineIds?: string[]},
+        stops: {name: string, id: string, lineIds?: string[]}[]
     ) => void;
 }
 
@@ -85,12 +83,13 @@ export function useShortestPath({
     });
 
     let totalDistance = 0;
-    const stops: { name: string, id: string }[] = [];
+    const stops: { name: string, id: string, lineIds: string[] }[] = [];
 
     path.nodes().forEach(node => {
       const name = node.data("label"); 
       const id = node.id();
-      stops.push({ name, id });
+      const lineIds = node.data("lineIds") || []; 
+      stops.push({ name, id, lineIds});
     });
 
     path.edges().forEach(edge => {
@@ -110,7 +109,7 @@ export function useShortestPath({
       totalDistance += distance;
     });
 
-    const speed = 40; // Velocità media in km/h (puoi modificarla in base al tuo caso d'uso)
+    const speed = 30; // Velocità media in km/h (puoi modificarla in base al tuo caso d'uso)
     const timeInHours = totalDistance / speed; // Tempo in ore
     const timeInMinutes = timeInHours * 60; // Tempo in minuti
     const formattedTime = formatTime(timeInMinutes);

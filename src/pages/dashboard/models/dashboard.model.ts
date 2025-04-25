@@ -7,6 +7,6 @@ export interface DashboardState {
 }
 
 export interface MetroPath {
-    from : {name: string, id: string}
-    to : {name: string, id: string}
+    from : {name: string, id: string, lineIds?: string[]}
+    to : {name: string, id: string, lineIds?: string[]}
 }

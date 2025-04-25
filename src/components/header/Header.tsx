@@ -116,6 +116,12 @@ function Header() {
         <span role="button" className={`font-size-18 ${searchFrom.id || searchTo.id ? '' : 'disabled-element'} `} aria-label="Reset" onClick={onPathReset}>🔄</span>
       
       </div>
+
+      <div className="header__label position-absolute w-100 px-2 py-1">
+        <p className="mb-0 font-size-10 text-white">
+          {'Inizia la tua ricerca selezionando la fermata di partenza e di arrivo'}
+        </p>
+      </div>
     </header>
   );
 }

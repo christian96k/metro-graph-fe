@@ -1,40 +1,62 @@
+import { useCallback } from "react";
+import { useDashboardFacade } from "../../pages/dashboard/store/dashboard.facade";
 import "./PathInfo.scss";
+import { IMAGES_PATH } from '../../core/constants/images.path';
 
 
 export interface PathInfoProps {
     distance: string;
     duration?: string;
-    from?: { name: string; id: string };
-    to?: { name: string; id: string };
-    stops: {name: string; id: string}[];
+    from?: { name: string; id: string, lineIds?: string[] };
+    to?: { name: string; id: string, lineIds?: string[] };
+    stops: {name: string; id: string, lineIds?: string[] }[];
 }
 
 function PathInfo( { distance, duration, stops }: PathInfoProps) {
-  return (
-    <footer className="path-info box-shadow-top row align-items-center p-2">
+    const { facadeSetMetroStop, graphMetro$ } = useDashboardFacade();
 
 
-        <div className="path-info__stops col-12 px-0">
-            <ul className="list-unstyled d-flex px-2 pt-3 pt-md-4 pb-1 gap-4 m-0">
-                {stops.map((stop, index) => (
-                    <li key={index} className="path-info__stops__item w-25 position-relative d-flex justify-content-between align-items-center d-flex diagonal-text">
-                        <span className="font-size-8">  {stop.name.replace(/\s*\(.*?\)\s*/g, '').trim()}</span>
-                        {/* <span className="font-size-12">{stop.id}</span> */}
-                        <marker className="position-absolute">°</marker> 
-                    </li>
-                ))}
-            </ul>
-        </div>
+    const onViewMetroStop = useCallback((stopId: string) => {
+        if (graphMetro$) {
+            const activeMetroStop = graphMetro$?.metro_stops.find((stop) => stop.stop_id === stopId);
+            if (activeMetroStop) {
+                facadeSetMetroStop(activeMetroStop);
+            }
+        }
+    }, [graphMetro$?.metro_stops]); 
 
-        <div className="path-info__distance col-12  px-0 d-none justify-content-between align-items-center">
-            <p className="mb-0">{distance} {'km'}</p>
-            <div className="path-info__duration">
-                <p className="mb-0">{duration} {'min'}</p>
+    return (
+        <footer className="path-info box-shadow-top row align-items-center p-2 position-relative">
+
+
+            <div className="path-info__stops col-12 px-0">
+                <ul className="list-unstyled d-flex p-2 gap-2 m-0">
+                    {stops.map((stop, index) => (
+                        <li key={index} style={{minWidth:'4rem'}} className={`path-info__stops__item position-relative d-flex flex-column align-items-center d-flex`}>
+                            <span className="font-size-10 cursor-pointer" onClick={()=>onViewMetroStop(stop.id)}>  {stop.name.replace(/\s*\(.*?\)\s*/g, '').trim()}</span>
+                                {stop.lineIds?.map((lineId, index )=>
+                                    // <div className={`line-separator ${lineId}`}  key={lineId+index}></div>
+                                    <img key={index} className={`path-info__stops__item__line xs-img my-1 ${lineId}`} src={IMAGES_PATH[lineId as keyof typeof IMAGES_PATH]} alt={lineId} />
+                                )}
+                        </li>
+                    ))}
+                </ul>
             </div>
-        </div>
 
-    </footer>
-  )
+            <div className="path-info__box d-flex justify-content-between position-absolute">
+
+                <div className="path-info__distance">
+                    <p className="font-size-14 mb-0">{distance} {'km'}</p>
+                </div>
+                <div className="path-info__duration">
+                    <p className="font-size-14 mb-0">{duration} {'min'}</p>
+                </div>
+
+            </div>
+
+
+        </footer>
+    )
 }
 
 export default PathInfo

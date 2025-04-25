@@ -7,13 +7,18 @@
     background: variables.$pure-white;
  
 
+    
+
     z-index: variables.$z-index-2;
     &__header{
-        // border: 1px solid #ccc;
         &__line{
             max-width: 2rem;
             max-height: 1.5rem;
-    }
+        }
+        background: variables.$dark-gray;
+        color: variables.$pure-white;
+        border-top-left-radius: variables.$border-radius-1;
+        border-top-left-radius: variables.$border-radius-1;
     }
 
     &__photo{
@@ -36,8 +41,6 @@
         // border: 1px solid #ccc;
     }
 
-    
-
-    
+ 
       
 }

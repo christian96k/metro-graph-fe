@@ -35,6 +35,7 @@ input[type="email"]{
     border-radius: variables.$border-radius-1;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     font-size: 12px;
+    padding: 0.275rem 0.75rem;
 }
   
 ::placeholder{
@@ -47,4 +48,22 @@ textarea:focus,
 textarea:active,
 textarea:hover {
     box-shadow: none !important;
+}
+
+
+//scrollbar
+::-webkit-scrollbar {
+    width: 10px!important;
+    height: 10px!important;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    border: 2px solid transparent; /* per spaziatura interna */
+    background-clip: padding-box;
 }

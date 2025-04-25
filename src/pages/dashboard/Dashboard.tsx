@@ -25,7 +25,7 @@ function Dashboard() {
       <Header/>
       <section className="dashboard container-fluid row m-0 p-0">
         {/* HEADER */}
-        <div className="dashboard__header position-absolute d-flex flex-column gap-2 w-50">
+        <div className="dashboard__header position-absolute d-flex flex-column gap-2 w-25">
           {availableLines.map((line, index) =>
             <img key={index} className="img-fluid" src={line} alt="" />
           )}
