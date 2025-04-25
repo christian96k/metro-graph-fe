@@ -42,7 +42,7 @@ export const METRO_UNIQUE_DATA: MetroData = {
       stop_id: "05020",
       stop_code: "05020",
       stop_name: "ARCO DI TRAVERTINO (MA)",
-      stop_description: "No description",
+      stop_description: "Arco di Travertino è un'area urbana del Municipio Roma VII di Roma Capitale. Fa parte della zona urbanistica 9B Tuscolano Sud, nel quartiere Q. VIII Tuscolano. Si trova fra la via Tuscolana e la via Appia Nuova, a nord della zona urbanistica di Tor Fiscale e a ovest della zona urbanistica del Quadraro. Nei pressi del confine con queste due zone, sulla via Tuscolana, si trova la Porta Furba, un arco dell'acquedotto Felice. Un arco dell'acquedotto di Claudio, costruito con pietra di travertino, dà il nome alla zona. Nell'area sud della zona, a ridosso di via Appia Nuova, si estende il parco archeologico delle Tombe di via Latina, un complesso funerario del II secolo sulla via Latina antica. Gli scavi furono condotti tra il 1857 e il 1858 a opera di Lorenzo Fortunati[1]. L'entrata in servizio della linea A della Metropolitana nel febbraio del 1980 e la realizzazione della relativa fermata nei pressi di Via Grottaferrata, nel mezzo di un campo di terrapieni, ha dato luogo alla creazione di un capolinea bus e alla costruzione di un quartiere popolare con edifici di quattro piani, che si è fuso con il preesistente e isolato complesso di via Genzano.",
       stop_lat: 41.866747,
       stop_lon: 12.536497,
       wheelchair_boarding: true,

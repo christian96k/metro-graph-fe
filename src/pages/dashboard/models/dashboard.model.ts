@@ -4,6 +4,7 @@ export interface DashboardState {
     graph: MetroData | null;
     metroStop: MetroStop | null;
     metroPath: MetroPath | null;
+    metroLine: string[] | null;
 }
 
 export interface MetroPath {

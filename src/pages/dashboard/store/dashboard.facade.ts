@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store/rootReducer";
-import { getGraphMetro, resetGraphMetroStop, resetMetroPath, searchMetroPath, setGraphMetroStop } from "./dashboard.actions";
+import { getGraphMetro, resetGraphMetroStop, resetMetroLine, resetMetroPath, searchMetroPath, setGraphMetroStop, setMetroLine } from "./dashboard.actions";
 import { MetroStop } from "../../../models/metro-data.model";
 import { MetroPath } from "../models/dashboard.model";
 
@@ -11,7 +11,7 @@ export function useDashboardFacade() {
   const graphMetro$ = useSelector((state: RootState) => state.dashboard.graph);
   const metroStop$ = useSelector((state: RootState) => state.dashboard.metroStop);
   const metroPath$ = useSelector((state: RootState) => state.dashboard.metroPath);
-
+  const metroLine$ = useSelector((state: RootState) => state.dashboard.metroLine); 
 
   
   
@@ -27,6 +27,10 @@ export function useDashboardFacade() {
     dispatch(searchMetroPath(metroPath));
   }
 
+  const facadeSetMetroLine = (line: string) => {
+    dispatch(setMetroLine(line));
+  }
+
   const facadeResetMetroPath = () => {
     dispatch(resetMetroPath());
   }
@@ -35,16 +39,23 @@ export function useDashboardFacade() {
     dispatch(resetGraphMetroStop());
   }
 
+
+  const facadeResetMetroLine = () =>{
+    dispatch(resetMetroLine());
+  }
   
 
   return {
     graphMetro$,
     metroStop$,
     metroPath$,
+    metroLine$,
     facadeGetGraphMetro,
     facadeSetMetroStop,
+    facadeSetMetroLine,
     facadeSearchMetroPath,
     facadeResetMetroStop,
     facadeResetMetroPath,
+    facadeResetMetroLine
   }
 }

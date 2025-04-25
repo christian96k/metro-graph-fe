@@ -4,10 +4,7 @@
 .panel{
     border-top-left-radius: variables.$border-radius-2;
     border-bottom-left-radius: variables.$border-radius-1;
-    background: variables.$pure-white;
  
-
-    
 
     z-index: variables.$z-index-2;
     &__header{
@@ -29,17 +26,16 @@
     }
 
     &__body{
-        // border: 1px solid #ccc;
-        max-height: 40dvh;
-        overflow-y: auto;
-        @include viewport.custom-media-breakpoint-down(md){
-            max-height: 30dvh;
+        p{
+            max-height: 40dvh;
+            overflow-y: auto;
+            @include viewport.custom-media-breakpoint-down(md){
+                max-height: 20dvh;
+            }
         }
     }
 
-    &__footer{
-        // border: 1px solid #ccc;
-    }
+ 
 
  
       

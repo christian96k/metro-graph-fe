@@ -30,14 +30,27 @@ function PathInfo( { distance, duration, stops, from, to }: PathInfoProps) {
 
 
             <div className="path-info__stops col-12 px-0">
-                <ul className="list-unstyled d-flex p-2 gap-2 m-0 justify-content-center">
+                <ul className="list-unstyled d-flex p-2 gap-2 m-0 ">
                     {stops.map((stop, index) => (
-                        <li key={index} style={{minWidth:'4rem'}} className={`path-info__stops__item position-relative d-flex flex-column align-items-center d-flex`}>
-                            <span className={`font-size-10 cursor-pointer ${from?.id === stop.id || to?.id === stop.id  ? 'fw-bolder' : ''} `} onClick={()=>onViewMetroStop(stop.id)}>  {stop.name.replace(/\s*\(.*?\)\s*/g, '').trim()}</span>
-                                {stop.lineIds?.map((lineId, index )=>
-                                    // <div className={`line-separator ${lineId}`}  key={lineId+index}></div>
-                                    <img key={index} className={`path-info__stops__item__line xs-img my-1 ${lineId}`} src={IMAGES_PATH[lineId as keyof typeof IMAGES_PATH]} alt={lineId} />
-                                )}
+                        <li key={index} style={{minWidth:'4rem'}} className={`path-info__stops__item position-relative gap-3 align-items-center d-flex`}>
+
+                            <div className="d-flex flex-column">
+
+                                <span className={`font-size-10 cursor-pointer ${from?.id === stop.id || to?.id === stop.id  ? 'fw-bolder' : ''} `} 
+                                    onClick={()=>onViewMetroStop(stop.id)}>  
+                                        {stop.name.replace(/\s*\(.*?\)\s*/g, '').trim()}
+                                </span>
+                                <div className="d-flex gap-1">
+                                    {stop.lineIds?.map((lineId, index )=>
+                                        // <div className={`line-separator ${lineId}`}  key={lineId+index}></div>
+                                        <img key={index} className={`path-info__stops__item__line xs-img my-1 ${lineId}`} src={IMAGES_PATH[lineId as keyof typeof IMAGES_PATH]} alt={lineId} />
+                                    )}
+
+                                </div>
+
+                            </div>
+                            {index !== stops.length - 1 && <i className="icon-next"></i>}
+
                         </li>
                     ))}
                 </ul>

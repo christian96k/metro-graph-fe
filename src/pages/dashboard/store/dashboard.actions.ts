@@ -11,4 +11,6 @@ export const resetGraphMetroStop = createAction('[Graph] reset Graph Metro stop'
 export const searchMetroPath = createAction<MetroPath>('[Graph] search Graph Metro path');
 export const resetMetroPath = createAction('[Graph] reset Graph Metro path');
 
+export const setMetroLine = createAction<string>('[Graph] set Graph Metro line');
+export const resetMetroLine = createAction('[Graph] reset Graph Metro line');
 

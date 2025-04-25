@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import GraphMetro from "../../components/graph-metro/GraphMetro";
 import "./Dashboard.scss";
 import { useDashboardFacade } from './store/dashboard.facade';
@@ -10,8 +10,9 @@ import Header from "../../components/header/Header";
 function Dashboard() {
 
   const graphDataFetch = useRef<boolean>(false);
-  const { graphMetro$, metroStop$, facadeGetGraphMetro } = useDashboardFacade();
-  const availableLines = useMemo(() => [IMAGES_PATH.MA, IMAGES_PATH.MB, IMAGES_PATH.MB1, IMAGES_PATH.MC], []);
+  const { graphMetro$, metroStop$, metroLine$, facadeGetGraphMetro } = useDashboardFacade();
+  const availableLines = useMemo(() => [{name: 'MA',image:IMAGES_PATH.MA}, {name: 'MB',image:IMAGES_PATH.MB}, {name: 'MB1',image:IMAGES_PATH.MB1}, {name: 'MC',image:IMAGES_PATH.MC}], []);
+  const [showOffcanvas, setShowOffcanvas] = useState(false);
 
   useEffect(() => {
     if (!graphDataFetch.current) {
@@ -20,33 +21,37 @@ function Dashboard() {
     }
   },[])
 
+
+  useEffect(() => {
+    if (metroStop$) 
+      setShowOffcanvas(true);  
+    else 
+      setShowOffcanvas(false); 
+  }, [metroStop$]);
+
   return (
     <>
-      <Header/>
+      <Header />
       <section className="dashboard container-fluid row m-0 p-0">
         {/* HEADER */}
         <div className="dashboard__header position-absolute d-flex flex-column gap-2 w-25">
-          {availableLines.map((line, index) =>
-            <img key={index} className="img-fluid" src={line} alt="" />
-          )}
-        </div>  
-
-        {/* GRAPH METRO */}
-        <div className={`dashboard__graph col-12  ${metroStop$ ? 'col-sm-9 h-25' : ''} px-0`}>
-          {graphMetro$ ? 
-            <GraphMetro/> : <Loader/> 
-          }
+          {availableLines.map((line, index) => (
+            <img key={line.name + '-' + index} className={`img-fluid  ${metroLine$ && !metroLine$.includes(line.name) ? 'disabled-metro' : '' }  `} src={line.image} alt=""  />
+          ))}
         </div>
 
-        {/* PANEL */}
-        {metroStop$ && 
-          <div className={`dashboard__panel col-12 ${metroStop$ ? 'col-sm-3 ' : ''}  p-0`}>
-            <Panel data={metroStop$}/>
-          </div>
-        }
+        {/* GRAPH METRO */}
+        <div className={`dashboard__graph col-12  px-0`}>
+          {graphMetro$ ? <GraphMetro /> : <Loader />}
+        </div>
+
+        {/* PANEL - Offcanvas */}
+        {metroStop$ && (
+          <Panel showOffcanvas={showOffcanvas} data={metroStop$} />
+        )}
       </section>
     </>
-  )
+  );
 }
 
 export default Dashboard
