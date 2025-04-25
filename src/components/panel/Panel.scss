@@ -19,10 +19,14 @@
     }
 
     &__photo{
-     >img{
-        max-height: 15rem;
-        border-radius: variables.$border-radius-1;
-     }   
+        min-height: 10rem;
+        >img{
+            max-height: 15rem;
+            @include viewport.custom-media-breakpoint-down(md){
+                max-height: 10rem;
+            }
+            border-radius: variables.$border-radius-1;
+        }   
     }
 
     &__body{
@@ -30,7 +34,7 @@
             max-height: 40dvh;
             overflow-y: auto;
             @include viewport.custom-media-breakpoint-down(md){
-                max-height: 20dvh;
+                max-height: 15dvh;
             }
         }
     }

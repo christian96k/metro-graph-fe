@@ -81,6 +81,37 @@ function GraphMetro() {
             }
         }
     }, [metroStop$]);
+
+    const onMetroSnapShot = useCallback((fill:boolean) => {
+        if (cyGraph.current) {
+            try {
+                const img = cyGraph.current.png({
+                    full: fill,
+                    scale: fill ? 0.5 : 1, 
+                });
+                const link = document.createElement('a');
+                link.href = img;
+                link.download = `graph_metro_${fill ? 'full' : 'visible'}.png`;
+                link.click();
+            } catch (error) {
+                console.error('Errore durante il download del grafo:', error);
+            }
+        }
+    }, [cyGraph]);
+
+    const onGraphFitReset = useCallback(() => {
+        if (cyGraph.current) {
+            cyGraph.current.animate(
+                {
+                    fit: { eles: cyGraph.current.elements(), padding: 50 },
+                    duration: 600,
+                    easing: 'ease-in-out',
+                }
+            );
+        }
+    },[cyGraph]);
+
+
     // #endregion handle node selection
 
 
@@ -125,6 +156,12 @@ function GraphMetro() {
                     <PathInfo distance={pathInfo.pathDistance} duration={pathInfo.duration} stops={pathInfo.stops} from={pathInfo.from} to={pathInfo.to} />
                 </div>
             }
+
+            <div className="graph-metro__tools position-absolute d-flex flex-column gap-3 align-items-center">
+                <i role="button" className="icon-gallery text-white font-size-22 d-flex justify-content-center align-items-center cursor-pointer" onClick={()=>onMetroSnapShot(false)}></i>
+                <i role="button" className="icon-deep-dive text-white font-size-22 d-flex justify-content-center align-items-center cursor-pointer" onClick={()=>onGraphFitReset()}></i>
+            </div>
+
         </section>
     )
 }

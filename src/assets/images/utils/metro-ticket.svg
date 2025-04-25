@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   width="579.84375"
+   height="580.88086"
+   id="svg2"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="Feature ticket office inv.svg">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1366"
+     inkscape:window-height="706"
+     id="namedview18"
+     showgrid="false"
+     inkscape:zoom="0.40627953"
+     inkscape:cx="289.92188"
+     inkscape:cy="290.44043"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2" />
+  <defs
+     id="defs4" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     d="m 66.27487,1.775993 c -41.335,0 -64.571,21.371 -64.571,65.036 l 0,450.121997 c 0,40.843 20.891,62.228 62.192,62.228 l 452.024,0 c 41.30298,0 62.22608,-20.32 62.22608,-62.228 l 0,-450.121997 c 0,-42.6 -20.9231,-65.036 -63.52308,-65.036 0,0 -448.491,-0.142 -448.348,0 z"
+     id="path2465"
+     style="stroke:#000000;stroke-width:3.40799999;stroke-miterlimit:10"
+     inkscape:connector-curvature="0" />
+  <rect
+     width="190.56944"
+     height="263.99057"
+     rx="27.791378"
+     ry="28.342545"
+     x="136.11205"
+     y="-4.1281743"
+     transform="matrix(0.97185939,0.23556174,-0.22595959,0.97413668,0,0)"
+     id="rect3031"
+     style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:14.43374157000000000;stroke-miterlimit:4;stroke-opacity:1" />
+  <rect
+     width="95.284721"
+     height="80.978699"
+     x="183.75438"
+     y="28.263321"
+     transform="matrix(0.97185939,0.23556174,-0.22595959,0.97413668,0,0)"
+     id="rect3033"
+     style="fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:1.60374904000000010" />
+  <rect
+     width="95.284721"
+     height="40.489349"
+     x="183.75438"
+     y="190.2207"
+     transform="matrix(0.97185939,0.23556174,-0.22595959,0.97413668,0,0)"
+     id="rect3035"
+     style="fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:1.60374904" />
+  <rect
+     width="190.93475"
+     height="265.11636"
+     rx="27.84465"
+     ry="28.463413"
+     x="41.009003"
+     y="57.074078"
+     id="rectBiglietto"
+     style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:14.47834205999999900;stroke-miterlimit:4;stroke-opacity:1" />
+  <rect
+     width="95.467377"
+     height="81.324043"
+     x="88.742676"
+     y="89.603691"
+     id="rectBigliettoDettaglio1"
+     style="fill:#000000;fill-opacity:1" />
+  <rect
+     width="95.467377"
+     height="40.662022"
+     x="88.742676"
+     y="252.25177"
+     id="rectBigliettoDettaglio2"
+     style="fill:#000000;fill-opacity:1" />
+  <path
+     d="M 397.90939,379.27024 A 95.4674,97.588882 0 1 1 262.8981,517.28176 95.4674,97.588882 0 0 1 397.90939,379.27024 z"
+     id="path3023"
+     style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:14.47834682000000100;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1"
+     inkscape:connector-curvature="0" />
+  <text
+     x="-133.60703"
+     y="606.03168"
+     transform="matrix(0.69937869,-0.71492026,0.69937869,0.71492026,0,0)"
+     id="text3025"
+     xml:space="preserve"
+     style="font-size:160.87051392000001000px;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial">€</text>
+  <path
+     d="m 534.2571,349.84062 a 95.467375,97.588849 0 0 1 -190.93475,0 95.467375,97.588849 0 1 1 190.93475,0 z"
+     id="pathMoneta"
+     style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:14.47834205999999900;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1"
+     inkscape:connector-curvature="0" />
+  <text
+     x="387.33365"
+     y="402.32181"
+     transform="scale(0.98907085,1.0110499)"
+     id="textEuro"
+     xml:space="preserve"
+     style="font-size:160.87046814000001000px;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial">€</text>
+</svg>

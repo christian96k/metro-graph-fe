@@ -1,7 +1,35 @@
 @use "../../assets/scss/variables.scss" as variables;
+@use "../../assets/scss/viewport.scss" as viewport;
+
 .graph-metro {
     &__distance-path{
         bottom:0;
+    }
+
+    &__tools{
+        bottom: 15dvh;
+        left: 1rem;
+
+        @include viewport.custom-media-breakpoint-down(md){
+            right: 1rem;
+            left: unset;
+            bottom: 18dvh;
+
+        }
+        [role="button"] {
+            user-select: none; 
+
+            &:hover{
+                transform: scale(1.2);
+                transition: all 0.2s ease-in-out;
+            }
+            &:active {
+            transform: scale(2);
+            transition: all 0.3s ease-in-out;
+            }
+            width: 2.2rem;
+            height: 2.2rem;
+        }
     }
 }
 

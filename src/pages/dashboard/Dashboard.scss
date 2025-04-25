@@ -20,8 +20,8 @@
             &.disabled-metro{
                 filter: grayscale(100%);
             }
-            max-width: 4rem;
-            max-height: 3rem;
+            max-width: 3rem;
+            max-height: 2.5rem;
             @include viewport.custom-media-breakpoint-down(md){
                 max-width: 2.5rem;
                 max-height: 1.5rem;

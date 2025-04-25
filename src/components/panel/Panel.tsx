@@ -34,7 +34,7 @@ const Panel: React.FC<PanelProps> = ({ data, showOffcanvas }) => {
                     </div>
 
                     {/* PHOTO */}
-                    <div className="panel__photo p-2 p-md-3 text-center" style={{ minHeight: '15rem', position: 'relative' }}>
+                    <div className="panel__photo p-2 p-md-3 text-center" style={{ position: 'relative' }}>
                         <img
                             src={IMAGES_PATH[data?.stop_id as keyof typeof IMAGES_PATH]}
                             alt={data?.stop_name ?? 'station-image-metro'}
@@ -66,8 +66,9 @@ const Panel: React.FC<PanelProps> = ({ data, showOffcanvas }) => {
                 {/* FOOTER */}
                 <div className="panel__footer p-2 p-md-3">
                     <h5 >{'Servizi'}</h5>
-                    <div className="panel__body__item d-flex flex-column my-2">
-                        <img className={`xs-img ${data?.wheelchair_boarding ? '' : 'disabled-element'}`} src={IMAGES_PATH.WCHAIR} alt="" />
+                    <div className="panel__body__item d-flex gap-2 my-2">
+                        <img loading="lazy" className={`xs-img ${data?.wheelchair_boarding ? '' : 'disabled-element'}`} src={IMAGES_PATH.WCHAIR} alt="wheel chair" />
+                        <img loading="lazy" className={`xs-img `} src={IMAGES_PATH.MTICKET}  alt="metro ticket" />
                     </div>
                     
                 </div>

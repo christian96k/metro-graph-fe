@@ -31,12 +31,15 @@ import COLLI_ALBANI from '../../assets/images/metro-a-photo/75555-Colli_Albani.j
 import FLAMINIO from '../../assets/images/metro-a-photo/81151-Flaminio.jpg';
 import SPAGNA from '../../assets/images/metro-a-photo/82366-spagna.jpg';
 
+import MTICKET from '../../assets/images/utils/metro-ticket.svg';
+
 export const IMAGES_PATH = {
     MA: MA,
     MB: MB,
     MB1: MB1,
     MC: MC,
     WCHAIR: WCHAIR,
+    MTICKET: MTICKET,
 
     // Metro A photos
     "05000": TERMINI,
