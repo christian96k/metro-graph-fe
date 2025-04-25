@@ -4,8 +4,8 @@
 .dashboard{
     height: 100dvh;
     background-image: 
-    linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.89)), 
-    url("../../assets/images/utils/main-background.webp");
+    linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), 
+    url("../../assets/images/utils/graph-bg.webp");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -27,7 +27,7 @@
     }
 
     &__panel{
-        z-index: variables.$z-index-2;
+        z-index: variables.$z-index-1;
         border-radius: variables.$border-radius-1;
         // @include viewport.custom-media-breakpoint-down(md){
         //     height: 40dvh!important;

@@ -12,7 +12,7 @@ export interface PathInfoProps {
     stops: {name: string; id: string, lineIds?: string[] }[];
 }
 
-function PathInfo( { distance, duration, stops }: PathInfoProps) {
+function PathInfo( { distance, duration, stops, from, to }: PathInfoProps) {
     const { facadeSetMetroStop, graphMetro$ } = useDashboardFacade();
 
 
@@ -30,10 +30,10 @@ function PathInfo( { distance, duration, stops }: PathInfoProps) {
 
 
             <div className="path-info__stops col-12 px-0">
-                <ul className="list-unstyled d-flex p-2 gap-2 m-0">
+                <ul className="list-unstyled d-flex p-2 gap-2 m-0 justify-content-center">
                     {stops.map((stop, index) => (
                         <li key={index} style={{minWidth:'4rem'}} className={`path-info__stops__item position-relative d-flex flex-column align-items-center d-flex`}>
-                            <span className="font-size-10 cursor-pointer" onClick={()=>onViewMetroStop(stop.id)}>  {stop.name.replace(/\s*\(.*?\)\s*/g, '').trim()}</span>
+                            <span className={`font-size-10 cursor-pointer ${from?.id === stop.id || to?.id === stop.id  ? 'fw-bolder' : ''} `} onClick={()=>onViewMetroStop(stop.id)}>  {stop.name.replace(/\s*\(.*?\)\s*/g, '').trim()}</span>
                                 {stop.lineIds?.map((lineId, index )=>
                                     // <div className={`line-separator ${lineId}`}  key={lineId+index}></div>
                                     <img key={index} className={`path-info__stops__item__line xs-img my-1 ${lineId}`} src={IMAGES_PATH[lineId as keyof typeof IMAGES_PATH]} alt={lineId} />

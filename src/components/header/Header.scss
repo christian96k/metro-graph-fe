@@ -15,6 +15,7 @@
     @include viewport.custom-media-breakpoint-down(md){
         width: 100dvw;
     }
+
     .logo{
         border-radius: 100%;
         width: 2rem;
@@ -30,4 +31,15 @@
         border-bottom-left-radius: variables.$border-radius-1;
         border-bottom-right-radius: variables.$border-radius-1;
     }
+
+    i.icon-trash{
+        color: variables.$dark-red
+    }
+
+    @include viewport.custom-media-breakpoint-down(lg){
+        i{
+            font-size: 1rem!important;
+        }
+    }
+
 }

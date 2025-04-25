@@ -111,9 +111,9 @@ function Header() {
 
       </div>
 
-      <div className="header__action d-flex gap-2">
-        <span role="button" className={`font-size-18 ${!searchFrom.id || !searchTo.id ? 'disabled-element' : ''} `} aria-label="Search" onClick={onPathSearch}>🔍</span>
-        <span role="button" className={`font-size-18 ${searchFrom.id || searchTo.id ? '' : 'disabled-element'} `} aria-label="Reset" onClick={onPathReset}>🔄</span>
+      <div className="header__action d-flex gap-3">
+        <i role="button" className={`icon-search font-size-18 ${!searchFrom.id || !searchTo.id ? 'disabled-element' : ''} `} aria-label="Search" onClick={onPathSearch}></i>
+        <i role="button" className={`icon-trash font-size-18 ${searchFrom.id || searchTo.id ? '' : 'disabled-element'} `} aria-label="Reset" onClick={onPathReset}></i>
       
       </div>
 
