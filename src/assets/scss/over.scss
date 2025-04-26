@@ -72,3 +72,12 @@ textarea:hover {
 .offcanvas{
     border:0!important;
 }
+
+//buttons
+.btn{
+    &:focus,&:active{ 
+        outline: none!important;
+        box-shadow: none!important;
+        border: none!important;
+    }
+}

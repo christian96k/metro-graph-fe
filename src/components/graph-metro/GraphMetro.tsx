@@ -158,8 +158,8 @@ function GraphMetro() {
             }
 
             <div className="graph-metro__tools position-absolute d-flex flex-column gap-3 align-items-center">
-                <i role="button" className="icon-gallery text-white font-size-22 d-flex justify-content-center align-items-center cursor-pointer" onClick={()=>onMetroSnapShot(false)}></i>
-                <i role="button" className="icon-deep-dive text-white font-size-22 d-flex justify-content-center align-items-center cursor-pointer" onClick={()=>onGraphFitReset()}></i>
+                <i role="button" className="icon-gallery text-white font-size-24 d-flex justify-content-center align-items-center cursor-pointer" onClick={()=>onMetroSnapShot(false)}></i>
+                <i role="button" className="icon-deep-dive text-white font-size-24 d-flex justify-content-center align-items-center cursor-pointer" onClick={()=>onGraphFitReset()}></i>
             </div>
 
         </section>

@@ -11,10 +11,7 @@
         left: 1rem;
 
         @include viewport.custom-media-breakpoint-down(md){
-            right: 1rem;
-            left: unset;
             bottom: 18dvh;
-
         }
         [role="button"] {
             user-select: none; 
@@ -24,8 +21,8 @@
                 transition: all 0.2s ease-in-out;
             }
             &:active {
-            transform: scale(2);
-            transition: all 0.3s ease-in-out;
+                transform: scale(2);
+                transition: all 0.3s ease-in-out;
             }
             width: 2.2rem;
             height: 2.2rem;

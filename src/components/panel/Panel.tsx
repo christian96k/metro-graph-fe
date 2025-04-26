@@ -11,7 +11,6 @@ export interface PanelProps {
 }
 
 const Panel: React.FC<PanelProps> = ({ data, showOffcanvas }) => {
-
     return (
         <section className={`offcanvas p-0 offcanvas-${isMobile || isTablet ? 'bottom h-75' : 'end h-100'} ${showOffcanvas ? 'show' : ''} panel box-shadow-start d-flex flex-column justify-content-between  p-0`} 
             style={{ visibility: showOffcanvas ? 'visible' : 'hidden' }}
@@ -22,7 +21,9 @@ const Panel: React.FC<PanelProps> = ({ data, showOffcanvas }) => {
 
                     {/* HEADER */}
                     <div className="panel__header d-flex justify-content-between align-items-center p-2">
-                        <h5 className="">{data?.stop_name}</h5>
+                        {/* <i className={`cursor-pointer icon-angle-${isMobile || isTablet ? 'bttom' :'right'}`} onClick={()=>facadeResetMetroStop()}></i> */}
+
+                        <h5 className="mb-0">{data?.stop_name}</h5>
                         <div className="w-25 d-flex justify-content-end align-items-center gap-1 ">
                             {data?.line_ids.map((lineId, index) => {
                                 return (
@@ -30,7 +31,6 @@ const Panel: React.FC<PanelProps> = ({ data, showOffcanvas }) => {
                                 )
                             })}
                         </div>
-                    
                     </div>
 
                     {/* PHOTO */}

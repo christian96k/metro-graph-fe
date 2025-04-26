@@ -41,6 +41,8 @@ function Header() {
     if (searchFrom && searchTo) {
       facadeSearchMetroPath({from: searchFrom, to: searchTo});
       facadeResetMetroStop();
+      setShowFromSuggestions(false);
+      setShowToSuggestions(false);
     }
   },[searchFrom, searchTo]);
   
@@ -53,7 +55,9 @@ function Header() {
   },[searchFrom, searchTo]);
 
   return (
-    <header className="header d-flex align-items-center justify-content-between gap-2 gap-md-4 px-2 px-md-3 py-2 py-md-2">
+    <form className="header d-flex align-items-center justify-content-between gap-2 gap-md-4 px-2 px-md-3 py-2 py-md-2" 
+      onSubmit={(e) => { e.preventDefault(); onPathSearch(); }}
+      onReset={(e) => { e.preventDefault(); onPathReset(); }}>
       {/* <div className="logo d-flex align-items-center justify-content-center box-shadow">{'C'}</div> */}
       <div className="header__fields-search d-flex gap-2 position-relative">
         <div className="position-relative w-100">
@@ -112,8 +116,8 @@ function Header() {
       </div>
 
       <div className="header__action d-flex gap-3">
-        <i role="button" className={`icon-search font-size-18 ${!searchFrom.id || !searchTo.id ? 'disabled-element' : ''} `} aria-label="Search" onClick={onPathSearch}></i>
-        <i role="button" className={`icon-trash font-size-18 ${searchFrom.id || searchTo.id ? '' : 'disabled-element'} `} aria-label="Reset" onClick={onPathReset}></i>
+        <button  type="submit" className={`btn btn-sm icon-search font-size-18 ${!searchFrom.id || !searchTo.id ? 'disabled-element' : ''} `} aria-label="Search" ></button>
+        <button type="reset" role="button" className={`btn btn-sm icon-trash font-size-18 ${searchFrom.id || searchTo.id ? '' : 'disabled-element'} `} aria-label="Reset"></button>
       
       </div>
 
@@ -122,7 +126,7 @@ function Header() {
           {'Inizia la tua ricerca selezionando la fermata di partenza e di arrivo'}
         </p>
       </div>
-    </header>
+    </form>
   );
 }
 

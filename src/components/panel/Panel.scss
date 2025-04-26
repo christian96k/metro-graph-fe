@@ -4,7 +4,9 @@
 .panel{
     border-top-left-radius: variables.$border-radius-2;
     border-bottom-left-radius: variables.$border-radius-1;
- 
+    &.offcanvas-bottom{
+        border-top-left-radius: variables.$border-radius-1;
+    }
 
     z-index: variables.$z-index-2;
     &__header{
