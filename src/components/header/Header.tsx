@@ -55,17 +55,17 @@ function Header() {
   },[searchFrom, searchTo]);
 
   return (
-    <form className="header d-flex align-items-center justify-content-between gap-2 gap-md-4 px-2 px-md-3 py-2 py-md-2" 
+    <form className="header d-flex flex-column align-items-center bg-black-gradient   justify-content-between gap-1 px-2 px-md-3 py-2 pt-md-3" 
       onSubmit={(e) => { e.preventDefault(); onPathSearch(); }}
       onReset={(e) => { e.preventDefault(); onPathReset(); }}>
       {/* <div className="logo d-flex align-items-center justify-content-center box-shadow">{'C'}</div> */}
-      <div className="header__fields-search d-flex gap-2 position-relative">
+      <div className="header__fields-search col-12 d-flex gap-2 position-relative">
         <div className="position-relative w-100">
           <input
             ref={inputFromRef}
             type="text"
             className="form-control"
-            placeholder="Partenza da"
+            placeholder="Partenza"
             onChange={(e) => {
               setSearchFrom({name:e.target.value, id: ''});
               setShowFromSuggestions(true);
@@ -91,7 +91,7 @@ function Header() {
           ref={inputToRef}
           type="text"
           className="form-control"
-          placeholder="Arrivo a"
+          placeholder="Arrivo"
           onChange={(e) => {
             setSearchTo({name:e.target.value, id: ''});
             setShowToSuggestions(true);
@@ -113,16 +113,16 @@ function Header() {
 
         </div>
 
+        <div className="header__action d-flex">
+          <button  type="submit" className={`btn btn-sm  text-white icon-search font-size-18 ${!searchFrom.id || !searchTo.id ? 'disabled-element' : ''} `} aria-label="Search" ></button>
+          <button type="reset" role="button" className={`btn btn-sm  text-white icon-trash font-size-18 ${searchFrom.id || searchTo.id ? '' : 'disabled-element'} `} aria-label="Reset"></button>
+        
+        </div>
       </div>
 
-      <div className="header__action d-flex gap-3">
-        <button  type="submit" className={`btn btn-sm icon-search font-size-18 ${!searchFrom.id || !searchTo.id ? 'disabled-element' : ''} `} aria-label="Search" ></button>
-        <button type="reset" role="button" className={`btn btn-sm icon-trash font-size-18 ${searchFrom.id || searchTo.id ? '' : 'disabled-element'} `} aria-label="Reset"></button>
-      
-      </div>
 
-      <div className="header__label position-absolute w-100 px-2 py-1">
-        <p className="mb-0 font-size-10 text-white">
+      <div className="header__label text-center w-100 col-12">
+        <p className="mb-0 font-size-10 color-black-5">
           {'Inizia la tua ricerca selezionando la fermata di partenza e di arrivo'}
         </p>
       </div>

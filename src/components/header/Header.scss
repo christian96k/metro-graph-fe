@@ -9,8 +9,10 @@
     width: 48dvw;
     transform: translateX(-50%);
     z-index: variables.$z-index-2;
-    background-color: variables.$pure-white;
-    box-shadow: 0 7px 15px rgba(87, 86, 86, 0.3);
+    // background-color: variables.$pure-white;
+    border-bottom-left-radius: variables.$border-radius-3;
+    border-bottom-right-radius: variables.$border-radius-3;
+    box-shadow: 0 1px 7px rgba(87, 86, 86, 0.3);
   
     @include viewport.custom-media-breakpoint-down(md){
         width: 100dvw;
@@ -27,9 +29,8 @@
     &__label{
         top:100%;
         left: 0;
-        background-color: variables.$dark-gray;
-        border-bottom-left-radius: variables.$border-radius-1;
-        border-bottom-right-radius: variables.$border-radius-1;
+        // background-color: variables.$dark-gray;
+       
     }
 
     i.icon-trash{

@@ -108,7 +108,8 @@ export const NODE_COLORS = {
         LIGHT: '#eeeeee',
     },
     WHITE: '#ffffff',
-    BLACK: '#000000'
+    BLACK: '#000000',
+    GRAY: '#a3a3a3',
 }   
 
 export function getNodeBgColor(lineType: string) {

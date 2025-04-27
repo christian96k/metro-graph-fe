@@ -16,14 +16,15 @@ input[type="switch"]:focus,
 input[type="email"]:focus {
     outline: none !important;
     box-shadow: none !important;
-    border-color: variables.$pure-gray;
+    border-color: variables.$black-5;
+    background-color: transparent;
+
 }
   
 input[type="checkbox"].form-check-input {
-    border-color: variables.$pure-gray;
-
+    border-color: variables.$black-5;
     &:checked {
-        border-color: variables.$pure-gray;
+        border-color: variables.$black-5;
     }
   }
   
@@ -32,22 +33,31 @@ input[type="username"],
 input[type="password"],
 input[type="number"],
 input[type="email"]{
-    border-radius: variables.$border-radius-1;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-top-left-radius: variables.$border-radius-3;
+    border-top-right-radius: variables.$border-radius-3;
+    border-bottom-right-radius: variables.$border-radius-3;
+    border-bottom-left-radius: variables.$border-radius-3;
+    border-color: variables.$black-4;
+
     font-size: 12px;
     padding: 0.275rem 0.75rem;
+    background-color: transparent;
+    color: variables.$pure-white!important;
 }
   
 ::placeholder{
     font-size: 12px!important;
     letter-spacing: 0.156px;
     color: variables.$pure-gray;
+    color: variables.$black-5!important;
 }
 
 textarea:focus,
 textarea:active,
 textarea:hover {
     box-shadow: none !important;
+    background-color: transparent;
+
 }
 
 
@@ -62,7 +72,7 @@ textarea:hover {
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: variables.$pure-gray;
     border-radius: 10px;
     border: 2px solid transparent; /* per spaziatura interna */
     background-clip: padding-box;

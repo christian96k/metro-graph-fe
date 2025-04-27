@@ -1,19 +1,30 @@
 @use '../../assets/scss/variables.scss' as variables;
+@use '../../assets/scss/viewport.scss' as viewport;
+
 
 .suggestions{
-    z-index: variables.$z-index-1;
-    left: 0;
-    top: 118%;
+    z-index: 1111111111111;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 91.5%;
+    // border-top: unset!important;
     border-bottom-left-radius: variables.$border-radius-1;
     border-bottom-right-radius: variables.$border-radius-1;
-    max-height: 10rem;
+    max-height: 15rem;
     overflow-y: auto;
+    @include viewport.custom-media-breakpoint-down(md){
+        width: 88%;
+    }
 
     &__option{
         cursor: pointer;
+        color: variables.$black-5;
+        
         &:hover{
-            background: variables.$dark-gray;
             color: variables.$pure-white;
+            background-color: variables.$dark-gray;
+            border-radius: variables.$border-radius-3;
+
         }
     }
 }

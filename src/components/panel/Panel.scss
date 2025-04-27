@@ -2,10 +2,18 @@
 @use "../../assets/scss/viewport.scss" as viewport;
 
 .panel{
-    border-top-left-radius: variables.$border-radius-2;
-    border-bottom-left-radius: variables.$border-radius-1;
+    border-top-left-radius: variables.$border-radius-3;
+    border-bottom-left-radius: variables.$border-radius-3;
+    box-shadow: 0 7px 15px rgba(87, 86, 86, 0.3);
+    
     &.offcanvas-bottom{
-        border-top-left-radius: variables.$border-radius-1;
+        border-top-left-radius: variables.$border-radius-3;
+        border-top-right-radius: variables.$border-radius-3;
+        @include viewport.custom-media-breakpoint-down(md){
+            border-bottom-right-radius: 0!important;
+            border-bottom-left-radius: 0!important;
+
+        }
     }
 
     z-index: variables.$z-index-2;
@@ -14,10 +22,6 @@
             max-width: 2rem;
             max-height: 1.5rem;
         }
-        background: variables.$dark-gray;
-        color: variables.$pure-white;
-        border-top-left-radius: variables.$border-radius-1;
-        border-top-left-radius: variables.$border-radius-1;
     }
 
     &__photo{
@@ -27,7 +31,7 @@
             @include viewport.custom-media-breakpoint-down(md){
                 max-height: 10rem;
             }
-            border-radius: variables.$border-radius-1;
+            // border-radius: variables.$border-radius-1;
         }   
     }
 

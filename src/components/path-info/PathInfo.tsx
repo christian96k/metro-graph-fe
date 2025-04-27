@@ -26,7 +26,7 @@ function PathInfo( { distance, duration, stops, from, to }: PathInfoProps) {
     }, [graphMetro$?.metro_stops]); 
 
     return (
-        <footer className="path-info box-shadow-top row align-items-center p-2 position-relative">
+        <footer className="path-info box-shadow-top bg-black-gradient row align-items-center p-2 position-relative">
 
 
             <div className="path-info__stops col-12 px-0">
@@ -34,7 +34,7 @@ function PathInfo( { distance, duration, stops, from, to }: PathInfoProps) {
                     {stops.map((stop, index) => (
                         <li key={index} style={{minWidth:'4rem'}} className={`path-info__stops__item position-relative gap-3 align-items-center d-flex`}>
 
-                            <div className="d-flex flex-column">
+                            <div className="d-flex flex-column text-white">
 
                                 <span className={`font-size-10 cursor-pointer ${from?.id === stop.id || to?.id === stop.id  ? 'fw-bolder' : ''} `} 
                                     onClick={()=>onViewMetroStop(stop.id)}>  
@@ -49,7 +49,7 @@ function PathInfo( { distance, duration, stops, from, to }: PathInfoProps) {
                                 </div>
 
                             </div>
-                            {index !== stops.length - 1 && <i className="icon-next"></i>}
+                            {index !== stops.length - 1 && <i className="icon-next text-white"></i>}
 
                         </li>
                     ))}
