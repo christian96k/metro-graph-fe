@@ -11,6 +11,7 @@
     background-repeat: no-repeat;
     &__header{
         top: 1rem;
+        right: 1rem;
         @include viewport.custom-media-breakpoint-down(md){
             top: 5rem;
         }

@@ -34,7 +34,7 @@ function Dashboard() {
       <Header />
       <section className="dashboard container-fluid row m-0 p-0">
         {/* HEADER */}
-        <div className="dashboard__header position-absolute d-flex flex-column gap-2 w-25">
+        <div className="dashboard__header position-absolute align-items-end d-flex flex-column gap-2 w-25">
           {availableLines.map((line, index) => (
             <img key={line.name + '-' + index} className={`img-fluid  ${metroLine$ && !metroLine$.includes(line.name) ? 'disabled-metro' : '' }  `} src={line.image} alt=""  />
           ))}

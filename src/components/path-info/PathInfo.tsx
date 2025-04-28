@@ -26,13 +26,22 @@ function PathInfo( { distance, duration, stops, from, to }: PathInfoProps) {
     }, [graphMetro$?.metro_stops]); 
 
     return (
-        <footer className="path-info box-shadow-top bg-black-gradient row align-items-center p-2 position-relative">
+        <footer className="path-info box-shadow-top  position-relative p-2">
+            <div className="path-info__box d-flex flex-column justify-content-between pt-0 p-2">
 
+                <div className="path-info__distance">
+                    <p className="font-size-12 mb-0">{distance} {'km'}</p>
+                </div>
+                <div className="path-info__duration">
+                    <p className="font-size-12 mb-0">{duration} {'min'}</p>
+                </div>
 
-            <div className="path-info__stops col-12 px-0">
-                <ul className="list-unstyled d-flex p-2 gap-2 m-0 ">
+            </div>
+
+            <div className="path-info__stops bg-black-gradient col-12 px-0">
+                <ul className="list-unstyled p-2 m-0 ">
                     {stops.map((stop, index) => (
-                        <li key={index} style={{minWidth:'4rem'}} className={`path-info__stops__item position-relative gap-3 align-items-center d-flex`}>
+                        <li key={index}  className={`path-info__stops__item position-relative gap-2 my-2 text-center d-flex flex-column justify-content-center align-items-center `}>
 
                             <div className="d-flex flex-column text-white">
 
@@ -40,7 +49,7 @@ function PathInfo( { distance, duration, stops, from, to }: PathInfoProps) {
                                     onClick={()=>onViewMetroStop(stop.id)}>  
                                         {stop.name.replace(/\s*\(.*?\)\s*/g, '').trim()}
                                 </span>
-                                <div className="d-flex gap-1">
+                                <div className="d-flex justify-content-center">
                                     {stop.lineIds?.map((lineId, index )=>
                                         // <div className={`line-separator ${lineId}`}  key={lineId+index}></div>
                                         <img key={index} className={`path-info__stops__item__line xs-img my-1 ${lineId}`} src={IMAGES_PATH[lineId as keyof typeof IMAGES_PATH]} alt={lineId} />
@@ -49,23 +58,14 @@ function PathInfo( { distance, duration, stops, from, to }: PathInfoProps) {
                                 </div>
 
                             </div>
-                            {index !== stops.length - 1 && <i className="icon-next text-white"></i>}
+                            {index !== stops.length - 1 && <i className="icon-next font-size-14 text-white"></i>}
 
                         </li>
                     ))}
                 </ul>
             </div>
 
-            <div className="path-info__box d-flex justify-content-between position-absolute">
-
-                <div className="path-info__distance">
-                    <p className="font-size-14 mb-0">{distance} {'km'}</p>
-                </div>
-                <div className="path-info__duration">
-                    <p className="font-size-14 mb-0">{duration} {'min'}</p>
-                </div>
-
-            </div>
+           
 
 
         </footer>

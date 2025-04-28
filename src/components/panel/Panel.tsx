@@ -55,8 +55,8 @@ const Panel: React.FC<PanelProps> = ({ data, showOffcanvas }) => {
                         <h5>{'Dettagli'}</h5>
                     
 
-                        <div className="panel__body__item d-flex flex-column my-2">
-                            <p className="font-size-14 mb-0 color-black-5">{data?.stop_description ?? 'N/A'}</p>
+                        <div className="panel__body__item  d-flex flex-column my-2">
+                            <p className="font-size-14 mb-0  bg-black-gradient p-2 color-black-5">{data?.stop_description ?? 'N/A'}</p>
                         </div>
                         {/* <pre>
                             {JSON.stringify(data, null, 2)}

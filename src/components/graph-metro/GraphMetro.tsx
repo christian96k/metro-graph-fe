@@ -101,9 +101,10 @@ function GraphMetro() {
 
     const onGraphFitReset = useCallback(() => {
         if (cyGraph.current) {
+            const notHiddenNodes = cyGraph.current.elements().not('.hidden-path'); 
             cyGraph.current.animate(
                 {
-                    fit: { eles: cyGraph.current.elements(), padding: 50 },
+                    fit: { eles: notHiddenNodes, padding: 150 },
                     duration: 600,
                     easing: 'ease-in-out',
                 }
@@ -152,7 +153,7 @@ function GraphMetro() {
             />
 
             {pathInfo.pathDistance && !metroStop$ &&
-                <div className="graph-metro__distance-path w-100 position-absolute d-flex justify-content-center align-items-center">
+                <div className="graph-metro__distance-path position-absolute bg-black-gradient ">
                     <PathInfo distance={pathInfo.pathDistance} duration={pathInfo.duration} stops={pathInfo.stops} from={pathInfo.from} to={pathInfo.to} />
                 </div>
             }
