@@ -58,36 +58,37 @@ function PathInfo( { distance, duration, stops, from, to }: PathInfoProps) {
                         className="path-info__stops__item position-relative gap-2 my-2 text-center d-flex flex-column justify-content-center align-items-center"
                         >
                         <div className="d-flex flex-column text-white">
+                        
                             <span
-                            className={`font-size-10 cursor-pointer ${
-                                from?.id === stop.id || to?.id === stop.id ? 'fw-bolder' : ''
-                            }`}
-                            onClick={() => onViewMetroStop(stop.id)}
+                                className={`font-size-10 cursor-pointer ${
+                                    from?.id === stop.id || to?.id === stop.id ? 'fw-bolder' : ''
+                                }`}
+                                onClick={() => onViewMetroStop(stop.id)}
                             >
-                            {stop.name.replace(/\s*\(.*?\)\s*/g, '').trim()}
+                                {stop.name.replace(/\s*\(.*?\)\s*/g, '').trim()}
                             </span>
 
-                            {isTransfer && stop.id !== from?.id &&  (
-                            <div className="text-warning font-size-8 mt-1">
-                                Cambio da {currentLineIds.join(', ')} a {nextStopLineIds.join(', ')}
-                            </div>
-                            )}
-
                             <div className="d-flex gap-1 justify-content-center">
-                            {stop.lineIds?.map((lineId, i) => (
-                                <img
-                                key={i}
-                                className={`path-info__stops__item__line xs-img my-1 ${lineId}`}
-                                src={IMAGES_PATH[lineId as keyof typeof IMAGES_PATH]}
-                                alt={lineId}
-                                />
-                            ))}
+                                {stop.lineIds?.map((lineId, i) => (
+                                    <img
+                                    key={i}
+                                    className={`path-info__stops__item__line xs-img my-1 ${lineId}`}
+                                    src={IMAGES_PATH[lineId as keyof typeof IMAGES_PATH]}
+                                    alt={lineId}
+                                    />
+                                ))}
                             </div>
+                            {isTransfer && stop.id !== from?.id &&  (
+                                <div className="text-warning font-size-8 mt-1">
+                                    Cambio da {currentLineIds.join(', ')} a {nextStopLineIds.join(', ')}
+                                </div>
+                            )}    
                         </div>
 
                         {index !== stops.length - 1 && (
                             <i className="icon-next font-size-14 text-white"></i>
                         )}
+                        
                         </li>
                     );
 
