@@ -33,7 +33,7 @@ function PathInfo( { distance, duration, stops, from, to }: PathInfoProps) {
                     <p className="font-size-12 mb-0">{distance} {'km'}</p>
                 </div>
                 <div className="path-info__duration">
-                    <p className="font-size-12 mb-0">{duration} {'min'}</p>
+                    <p className="font-size-12 mb-0">{duration}</p>
                 </div>
 
             </div>

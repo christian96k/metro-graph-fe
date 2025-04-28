@@ -3,8 +3,8 @@
 
 .graph-metro {
     &__distance-path{
-        top:50%;
-        transform: translateY(-50%);
+        top:55%;
+        transform: translateY(-55%);
         left: 0;
         width: 10dvw;
         @include viewport.custom-media-breakpoint-down(md){
