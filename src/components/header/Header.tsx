@@ -39,12 +39,12 @@ function Header() {
 
   const onPathSearch = useCallback(() => {
     if (searchFrom && searchTo) {
-      facadeSearchMetroPath({from: searchFrom, to: searchTo});
+      facadeSearchMetroPath({from: {name:inputFromRef.current?.value ?? '', id: ''}, to: { name:inputToRef.current?.value ?? '', id: ''}});
       facadeResetMetroStop();
       setShowFromSuggestions(false);
       setShowToSuggestions(false);
     }
-  },[searchFrom, searchTo]);
+  },[searchFrom, searchTo, inputFromRef, inputToRef]);
   
   const onPathReset = useCallback(() => {
     setSearchFrom({name: '', id: ''});
