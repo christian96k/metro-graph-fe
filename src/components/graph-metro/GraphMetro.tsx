@@ -75,7 +75,6 @@ function GraphMetro() {
 
     const onCanvasClick = useCallback((event: cytoscape.EventObject) => {
         if (!event.target || event.target === cyGraph.current) {
-            console.log("Canvas clicked, no node selected.");
             if (metroStop$) {
                 facadeResetMetroStop();
             }

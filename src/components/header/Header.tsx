@@ -39,12 +39,12 @@ function Header() {
 
   const onPathSearch = useCallback(() => {
     if (searchFrom && searchTo) {
-      facadeSearchMetroPath({from: {name:inputFromRef.current?.value ?? '', id: ''}, to: { name:inputToRef.current?.value ?? '', id: ''}});
+      facadeSearchMetroPath({from:searchFrom, to: searchFrom});
       facadeResetMetroStop();
       setShowFromSuggestions(false);
       setShowToSuggestions(false);
     }
-  },[searchFrom, searchTo, inputFromRef, inputToRef]);
+  },[searchFrom, searchTo]);
   
   const onPathReset = useCallback(() => {
     setSearchFrom({name: '', id: ''});
@@ -71,7 +71,7 @@ function Header() {
               setShowFromSuggestions(true);
             }}
             onFocus={() => setShowFromSuggestions(true)}
-            onBlur={() => setTimeout(() => {setShowFromSuggestions(false); onPathSearch()}, 200)}
+            onBlur={() => setTimeout(() => {setShowFromSuggestions(false)}, 200)}
           />
           {graphMetro$ && searchFrom && showFromSuggestions && (
             <Suggestions
@@ -97,7 +97,7 @@ function Header() {
             setShowToSuggestions(true);
           }}
           onFocus={() => setShowToSuggestions(true)}
-          onBlur={() => setTimeout(() => {setShowToSuggestions(false), onPathSearch()}, 200)}
+          onBlur={() => setTimeout(() => {setShowToSuggestions(false)}, 200)}
         />
 
           {graphMetro$ && searchTo && showToSuggestions && (

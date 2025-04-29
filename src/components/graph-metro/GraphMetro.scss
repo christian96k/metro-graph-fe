@@ -9,16 +9,9 @@
         width: 10dvw;
         @include viewport.custom-media-breakpoint-down(md){
             width: 25dvw;
-            // bottom: 0;
-            // top: unset;
-            // transform: translate(0, 0);
-            // border-bottom-right-radius: 0;
-            // border-bottom-left-radius: 0;
         }
         border-top-right-radius: variables.$border-radius-3;
-        // border-top-left-radius: variables.$border-radius-3;
         border-bottom-right-radius: variables.$border-radius-3;
-        // border-bottom-left-radius: variables.$border-radius-3;
     }
 
     &__tools{

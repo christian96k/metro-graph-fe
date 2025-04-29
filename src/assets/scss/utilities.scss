@@ -28,8 +28,7 @@
 }
 
 
-
-// Font Size
+// font Size
 .font-size-8{
     font-size: 8px;
 }
@@ -117,7 +116,7 @@ img.loaded + .loader-overlay {
     display: none;
 }
 
-// text styles
+// text disposition styles
 .vertical-text {
     writing-mode: vertical-rl; 
     text-orientation: upright;
@@ -169,19 +168,8 @@ img.loaded + .loader-overlay {
     cursor: crosshair;
 }
 
-.bg-black-1{
-    background-color: variables.$black-1!important;
-}
-.bg-black-2{
-    background-color: variables.$black-2!important;
-}
-.bg-black-3{
-    background-color: variables.$black-3!important;
-}
-.bg-black-4{
-    background-color: variables.$black-4!important;
-}
 
+// borders
 .border-black-1{
     border: 1px solid variables.$black-1!important;
 }
@@ -195,6 +183,8 @@ img.loaded + .loader-overlay {
     border: 1px solid variables.$black-4!important;
 }
 
+
+// colors
 .color-black-1{
     color: variables.$black-1!important;
 }
@@ -219,6 +209,42 @@ img.loaded + .loader-overlay {
     color: variables.$pure-gray!important;
 }
 
+
+
+// background colors
+
+.bg-black-1{
+    background-color: variables.$black-1!important;
+}
+
+.bg-black-2{
+    background-color: variables.$black-2!important;
+}
+
+.bg-black-3{
+    background-color: variables.$black-3!important;
+}
+
+.bg-black-4{
+    background-color: variables.$black-4!important;
+}
+
+.bg-color-pure-gray{
+    background-color: variables.$pure-gray!important;
+}
+
+.bg-color-pure-white{
+    background-color: variables.$pure-white!important;
+}
+
+.bg-color-pure-red{
+    background-color: variables.$pure-red!important;
+}
+
+.bg-color-pure-green{
+    background-color: variables.$pure-green!important;
+}
+
 .bg-black-gradient {
     background: 
     linear-gradient(45deg, variables.$pure-black, variables.$black-4); 
@@ -239,6 +265,74 @@ img.loaded + .loader-overlay {
     linear-gradient(45deg, variables.$black-1, variables.$black-2);
 }
   
+// width
+
+.w-10{
+    width: 10%; 
+}
+
+.w-h20{
+    width: 20%;
+}
+
+.w-30{
+    width: 30%;
+}
+
+.w-40{
+    width: 40%;
+}
+
+.w-60{
+    width: 60%;
+}
+
+.w-70{
+    width: 70%;
+}
+
+.w-80{
+    width: 80%;
+}
+
+.w-90{
+    width: 90%;
+}
+
 .w-94{
     width: 94%;
 }
+
+// height
+.h-10{
+    height: 10%; 
+}
+
+.h-h20{
+    height: 20%;
+}
+
+.h-30{
+    height: 30%;
+}
+
+.h-40{
+    height: 40%;
+}
+
+.h-60{
+    height: 60%;
+}
+
+.h-70{
+    height: 70%;
+}
+
+.h-80{
+    height: 80%;
+}
+
+.h-90{
+    height: 90%;
+}
+

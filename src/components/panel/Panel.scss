@@ -2,9 +2,7 @@
 @use "../../assets/scss/viewport.scss" as viewport;
 
 .panel{
-    // border-top-left-radius: variables.$border-radius-3;
-    // border-bottom-left-radius: variables.$border-radius-3;
-    box-shadow: 0 7px 15px rgba(87, 86, 86, 0.3);
+    box-shadow: 0 7px 15px variables.$box-shadow-color;
     z-index: variables.$z-index-2;
     
     &.offcanvas-bottom{

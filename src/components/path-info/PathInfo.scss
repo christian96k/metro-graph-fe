@@ -3,24 +3,17 @@
 
 
 .path-info{
-
     border-top: 1px solid;
     border-left: 1px solid;
     border-right: 1px solid;
     border-bottom: 1px solid;
-    // box-shadow: 0 7px 15px rgba(87, 86, 86, 0.3);
-    // box-shadow: -7px 0 15px rgba(87, 86, 86, 0.3), 7px 0 15px rgba(87, 86, 86, 0.3);
     border-top-right-radius: variables.$border-radius-3;
-    // border-top-left-radius: variables.$border-radius-3;
     border-bottom-right-radius: variables.$border-radius-3;
-    // border-bottom-left-radius: variables.$border-radius-3;
     
     &__stops{
         overflow: auto;
 
         &__item{
-            // white-space: nowrap; 
-            // min-width: fit-content;
             padding: 0 0.5rem;
             flex: 0 0 auto;
             
@@ -55,27 +48,18 @@
         overflow-y: auto;
     }
 
-    &__box{
-        // bottom: 100%;
-        // left: 0;
-        // background-color: variables.$dark-gray;
-        
-    }
-
     &__distance{
         color: variables.$pure-white;
-        // background-color: variables.$dark-gray;
     }
 
     &__duration{
         color: variables.$pure-white;
-        // background-color: variables.$dark-gray;
     }
 
     .icon-next {
         display: inline-block;
-        transform: rotate(90deg); /* if starting from right */
-        transition: transform 0.3s ease; /* optional: smooth animation */
+        transform: rotate(90deg);
+        transition: transform 0.3s ease;
     }
 }
 
