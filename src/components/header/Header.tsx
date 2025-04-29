@@ -71,7 +71,7 @@ function Header() {
               setShowFromSuggestions(true);
             }}
             onFocus={() => setShowFromSuggestions(true)}
-            onBlur={() => setTimeout(() => setShowFromSuggestions(false), 200)}
+            onBlur={() => setTimeout(() => {setShowFromSuggestions(false); onPathSearch()}, 200)}
           />
           {graphMetro$ && searchFrom && showFromSuggestions && (
             <Suggestions
@@ -97,7 +97,7 @@ function Header() {
             setShowToSuggestions(true);
           }}
           onFocus={() => setShowToSuggestions(true)}
-          onBlur={() => setTimeout(() => setShowToSuggestions(false), 200)}
+          onBlur={() => setTimeout(() => {setShowToSuggestions(false), onPathSearch()}, 200)}
         />
 
           {graphMetro$ && searchTo && showToSuggestions && (
