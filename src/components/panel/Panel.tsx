@@ -13,11 +13,11 @@ export interface PanelProps {
 const Panel: React.FC<PanelProps> = ({ data, showOffcanvas }) => {
     return (
     <>
-        <section className={`offcanvas p-0 fade  offcanvas-${isMobile || isTablet ? 'bottom h-75' : 'end h-100'} ${showOffcanvas ? 'show' : ''} panel text-white bg-black-gradient box-shadow-start d-flex flex-column justify-content-between  p-0`} 
+        <section className={`offcanvas p-0 fade  offcanvas-${isMobile || isTablet ? ' mobile h-vh-100' : 'end h-vh-100'} ${showOffcanvas ? 'show' : ''} panel text-white bg-black-gradient box-shadow-start d-flex flex-column justify-content-between  p-0`} 
             style={{ visibility: showOffcanvas ? 'visible' : 'hidden' }}
             id="offcanvasPanel"
         >
-            <div className="offcanvas-body p-0">
+            <div className="offcanvas-body p-0 d-flex flex-column">
                 <section className="top">
 
                     {/* HEADER */}

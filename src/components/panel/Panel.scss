@@ -5,7 +5,10 @@
     box-shadow: 0 7px 15px variables.$box-shadow-color;
     z-index: variables.$z-index-2;
     
-    &.offcanvas-bottom{
+    border-top-left-radius: variables.$border-radius-3;
+    border-bottom-left-radius: variables.$border-radius-3;
+
+    &.mobile{
         border-top-left-radius: variables.$border-radius-3;
         border-top-right-radius: variables.$border-radius-3;
         @include viewport.custom-media-breakpoint-down(lg){
@@ -35,7 +38,7 @@
 
     &__body{
         p{
-            max-height: 40dvh;
+            max-height: 30dvh;
             overflow-y: auto;
             @include viewport.custom-media-breakpoint-down(md){
                 max-height: 15dvh;
