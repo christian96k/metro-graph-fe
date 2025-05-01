@@ -1,7 +1,7 @@
 import "./Header.scss";
 import Suggestions from "../suggestions/Suggestions";
 import { useDashboardFacade } from "../../pages/dashboard/store/dashboard.facade";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 function Header() {
   const { graphMetro$, facadeSearchMetroPath, facadeResetMetroPath, facadeResetMetroStop } = useDashboardFacade();
@@ -15,6 +15,16 @@ function Header() {
   const [showFromSuggestions, setShowFromSuggestions] = useState<boolean>(false);
   const [showToSuggestions, setShowToSuggestions] = useState<boolean>(false);
 
+
+  useEffect(() => {
+    if (searchFrom && searchTo && searchFrom.id && searchTo.id) {
+      onPathSearch();
+    }else{
+      facadeResetMetroPath();
+    }
+    
+  }, [searchFrom, searchTo]);
+  
 
   const onStopSelect = useCallback(
     (stopId: string, stopName: string, mode: 'FROM' | 'TO') => {
@@ -38,11 +48,15 @@ function Header() {
   );
 
   const onPathSearch = useCallback(() => {
-    if (searchFrom && searchTo) {
-      facadeSearchMetroPath({from:searchFrom, to: searchFrom});
+    if (Object.values(searchFrom).length && Object.values(searchTo).length) {
+      console.log('searchFrom', searchFrom);
+      console.log('searchTo', searchTo);
+      facadeSearchMetroPath({from:searchFrom, to: searchTo});
       facadeResetMetroStop();
       setShowFromSuggestions(false);
       setShowToSuggestions(false);
+    }else{
+      onPathReset();
     }
   },[searchFrom, searchTo]);
   
@@ -71,7 +85,12 @@ function Header() {
               setShowFromSuggestions(true);
             }}
             onFocus={() => setShowFromSuggestions(true)}
-            onBlur={() => setTimeout(() => {setShowFromSuggestions(false)}, 200)}
+            onBlur={(e) => {setTimeout(() => {
+              if (!e.target.value.trim()) {
+                setSearchFrom({name: '', id: ''});
+              }
+              setShowFromSuggestions(false);
+            }, 200)}}
           />
           {graphMetro$ && searchFrom && showFromSuggestions && (
             <Suggestions
@@ -96,8 +115,15 @@ function Header() {
             setSearchTo({name:e.target.value, id: ''});
             setShowToSuggestions(true);
           }}
-          onFocus={() => setShowToSuggestions(true)}
-          onBlur={() => setTimeout(() => {setShowToSuggestions(false)}, 200)}
+          onFocus={() => {
+            setShowToSuggestions(true);
+          }}
+          onBlur={(e) => setTimeout(() => {
+            if (!e.target.value.trim()) {
+              setSearchTo({name: '', id: ''});
+            }
+            setShowToSuggestions(false);
+          }, 200)}
         />
 
           {graphMetro$ && searchTo && showToSuggestions && (
