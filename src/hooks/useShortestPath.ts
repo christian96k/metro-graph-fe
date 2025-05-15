@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { Core, EdgeSingular } from "cytoscape";
-import { haversineDistance } from "../utils/metro-graph.utils";
+import { vincentyDistance } from "../utils/metro-graph.utils";
 import { MetroPath } from "../pages/dashboard/models/dashboard.model";
 
 
@@ -99,14 +99,20 @@ export function useShortestPath({
         console.warn('Missing coordinates for one or both nodes');
       }
 
-      const distance = haversineDistance(lat1, lon1, lat2, lon2);
+      const distance = vincentyDistance(lat1, lon1, lat2, lon2);
       totalDistance += distance;
     });
 
-    const speed = 30; // Velocità media in km/h (puoi modificarla in base al tuo caso d'uso)
-    const timeInHours = totalDistance / speed; // Tempo in ore
-    const timeInMinutes = timeInHours * 60; // Tempo in minuti
-    const formattedTime = formatTime(timeInMinutes);
+    const speed = 30; // km/h
+    const numStops = path.nodes().length - 1; // numero di tratti
+
+    const timeInHours = totalDistance / speed;
+    const stopTimePerStop = 0.5; // 30 secondi a fermata
+    const totalStopTime = stopTimePerStop * numStops;
+
+    const totalTimeInMinutes = timeInHours * 60 + totalStopTime;
+
+    const formattedTime = formatTime(totalTimeInMinutes);
 
     // 4. Passiamo le informazioni alla callback
     onPathFound?.(

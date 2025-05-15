@@ -45,7 +45,10 @@ export const METRO_GRAPH_CONFIG: MetroGraphConfig = {
                 "shape": (cy: cytoscape.NodeSingular) => {
                     return getLineShape(cy.data('lineType') )
                 }
-                
+                ,
+                'text-outline-color': '#000',
+                'text-outline-width': 2,
+                'text-margin-y': -10,
             }
         },
         {
@@ -60,7 +63,10 @@ export const METRO_GRAPH_CONFIG: MetroGraphConfig = {
                 'line-cap': 'round',
                 'curve-style': 'bezier',
                 'opacity': 0.7,
-                'line-dash-pattern': [0, 0],              
+                'line-dash-pattern': [6, 3] , 
+                'label': 'data(label)',
+                'text-rotation': 'autorotate', 
+                "color": '#fff',
             }
         },
         // hidden path

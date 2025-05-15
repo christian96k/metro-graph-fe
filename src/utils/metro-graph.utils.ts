@@ -40,7 +40,8 @@ export function mapDataElements(data: MetroData | null) {
             source: string,
             target: string,
             lineId: string,
-            color: string
+            color: string,
+            label?: string
         }
     }[] = [];
   
@@ -64,8 +65,12 @@ export function mapDataElements(data: MetroData | null) {
                 const dClosest = distance(current, closest);
                 return d < dClosest ? s : closest;
             });
+
+            // Calcola distanza in km con haversineDistance
+            const distKm = vincentyDistance(current.stop_lat, current.stop_lon, next.stop_lat, next.stop_lon);
+            // Formatta la distanza in modo leggibile, es: "0.5 km"
+            const distLabel = `${distKm.toFixed(2)} km`;
   
-      
             const edgeId = `${current.stop_id}_${next.stop_id}_${line.id}`;
             edges.push({
                 data: {
@@ -73,7 +78,8 @@ export function mapDataElements(data: MetroData | null) {
                     source: current.stop_id,
                     target: next.stop_id,
                     lineId: line.id,
-                    color: line.color
+                    color: line.color,
+                    label: distLabel
                 },
                 
             });
@@ -82,6 +88,7 @@ export function mapDataElements(data: MetroData | null) {
             current = next;
         }
     });
+  
   
     return [...nodes, ...edges];
 }
@@ -212,4 +219,72 @@ export function haversineDistance(lat1: number, lon1: number, lat2: number, lon2
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   
     return R * c; // Distanza in km
+}
+
+export function vincentyDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
+    const toRad = (deg: number) => deg * Math.PI / 180;
+
+    // Parametri ellissoide WGS-84
+    const a = 6378137.0;          // semiasse maggiore in metri
+    const f = 1 / 298.257223563;  // appiattimento
+    const b = (1 - f) * a;
+
+    const L = toRad(lon2 - lon1);
+    const U1 = Math.atan((1 - f) * Math.tan(toRad(lat1)));
+    const U2 = Math.atan((1 - f) * Math.tan(toRad(lat2)));
+
+    let sinU1 = Math.sin(U1), cosU1 = Math.cos(U1);
+    let sinU2 = Math.sin(U2), cosU2 = Math.cos(U2);
+
+    let lambda = L;
+    let lambdaP: number;
+    let iterLimit = 100;
+
+    let sinLambda: number, cosLambda: number;
+    let sinSigma: number, cosSigma: number, sigma: number;
+    let sinAlpha: number, cosSqAlpha: number;
+    let cos2SigmaM: number;
+    let C: number;
+
+    do {
+        sinLambda = Math.sin(lambda);
+        cosLambda = Math.cos(lambda);
+        sinSigma = Math.sqrt(
+            (cosU2 * sinLambda) * (cosU2 * sinLambda) +
+            (cosU1 * sinU2 - sinU1 * cosU2 * cosLambda) *
+            (cosU1 * sinU2 - sinU1 * cosU2 * cosLambda)
+        );
+        if (sinSigma === 0) return 0;  // coincident points
+
+        cosSigma = sinU1 * sinU2 + cosU1 * cosU2 * cosLambda;
+        sigma = Math.atan2(sinSigma, cosSigma);
+        sinAlpha = cosU1 * cosU2 * sinLambda / sinSigma;
+        cosSqAlpha = 1 - sinAlpha * sinAlpha;
+        cos2SigmaM = cosSqAlpha === 0 ? 0 : cosSigma - 2 * sinU1 * sinU2 / cosSqAlpha;
+
+        C = f / 16 * cosSqAlpha * (4 + f * (4 - 3 * cosSqAlpha));
+        lambdaP = lambda;
+        lambda = L + (1 - C) * f * sinAlpha *
+            (sigma + C * sinSigma * (cos2SigmaM + C * cosSigma * (-1 + 2 * cos2SigmaM * cos2SigmaM)));
+
+    } while (Math.abs(lambda - lambdaP) > 1e-12 && --iterLimit > 0);
+
+    if (iterLimit === 0) {
+        // formula non convergente
+        return NaN;
+    }
+
+    const uSq = cosSqAlpha * (a * a - b * b) / (b * b);
+    const A = 1 + uSq / 16384 * (4096 + uSq * (-768 + uSq * (320 - 175 * uSq)));
+    const B = uSq / 1024 * (256 + uSq * (-128 + uSq * (74 - 47 * uSq)));
+    const deltaSigma = B * sinSigma * (
+        cos2SigmaM + B / 4 * (
+            cosSigma * (-1 + 2 * cos2SigmaM * cos2SigmaM) -
+            B / 6 * cos2SigmaM * (-3 + 4 * sinSigma * sinSigma) * (-3 + 4 * cos2SigmaM * cos2SigmaM)
+        )
+    );
+
+    const s = b * A * (sigma - deltaSigma); // distanza in metri
+
+    return s / 1000; // ritorna distanza in km
 }
