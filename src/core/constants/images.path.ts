@@ -32,7 +32,7 @@ import FLAMINIO from '../../assets/images/metro-a-photo/81151-Flaminio.jpg';
 import SPAGNA from '../../assets/images/metro-a-photo/82366-spagna.jpg';
 
 
-import JONIO from '../../assets/images/metro-b1-photo/73755-Jonio.jpeg';
+import JONIO from '../../assets/images/metro-b1-photo/73755-Jonio.jpg';
 import CONCA_DORO from '../../assets/images/metro-b1-photo/71576-Conca_d_oro.jpg';
 import LIBIA from '../../assets/images/metro-b1-photo/72685-Libia.jpg';
 import S_AGNESE_ANNIBALIANO from '../../assets/images/metro-b1-photo/72650-Sant_Agnese_Annibaliano.jpg';
@@ -59,6 +59,26 @@ import EUR_MAGLIANA from '../../assets/images/metro-b-photo/73163-Magliana.jpg';
 import EUR_PALASPORT from '../../assets/images/metro-b-photo/73161-Palasport.jpg';
 import EUR_FERMI from '../../assets/images/metro-b-photo/76419-Eur_fermi.jpg';
 import LAURENTINA from '../../assets/images/metro-b-photo/05022-Laurentina.jpg';
+
+import TEANO from '../../assets/images/metro-c-photo/20409-Teano.jpg';
+import ALESSANDRINO from '../../assets/images/metro-c-photo/71264-Alessandrino.jpg';
+import TORRE_SPACCATA from '../../assets/images/metro-c-photo/71716-Torre_Spaccata.jpg';
+import TORRE_MAURA from '../../assets/images/metro-c-photo/71718-Torre_Maura.jpg';
+import GIARDINETTI from '../../assets/images/metro-c-photo/71721-Giardinetti.jpg';
+import TORRE_NOVA from '../../assets/images/metro-c-photo/71722-Torrenova.jpg';
+import CENTOCELLE from '../../assets/images/metro-c-photo/71749-Centocelle.jpg';
+import TORRE_GAIA from '../../assets/images/metro-c-photo/71758-Torre_Gaia.jpg';
+import GROTTE_CELONI from '../../assets/images/metro-c-photo/71760-Grotte_Celoni.jpg';
+import BORGHESIANA from '../../assets/images/metro-c-photo/71792-Borghesiana.jpg';
+import FONTANA_CANDIDA from '../../assets/images/metro-c-photo/71862-Fonte_Candida.jpg';
+import GARDENIE from '../../assets/images/metro-c-photo/72594-Gardenie.jpg';
+import MALATESTA from '../../assets/images/metro-c-photo/80275-Malatesta.jpeg';
+import PANTANO from '../../assets/images/metro-c-photo/80578-Pantano.jpg';
+import TORRE_ANGELA from '../../assets/images/metro-c-photo/82428-Torre_Angela.jpg';
+import LODI from '../../assets/images/metro-c-photo/82433-Lodi.jpeg';
+import MIRTI from '../../assets/images/metro-c-photo/82437-Mirti.jpg';
+import PIGNETO from '../../assets/images/metro-c-photo/82698-Pigneto.jpg';
+
 
 
 import MTICKET from '../../assets/images/utils/metro-ticket.svg';
@@ -129,5 +149,23 @@ export const IMAGES_PATH = {
     "76419": EUR_FERMI,
     "05022": LAURENTINA,
 
-
+    // Metro C photos
+    '20409': TEANO,
+    '71264': ALESSANDRINO,
+    '71716': TORRE_SPACCATA,
+    '71718': TORRE_MAURA,
+    '71721': GIARDINETTI,
+    '71722': TORRE_NOVA,
+    '71749': CENTOCELLE,
+    '71758': TORRE_GAIA,
+    '71760': GROTTE_CELONI,
+    '71792': BORGHESIANA,
+    '718262': FONTANA_CANDIDA,
+    '72594': GARDENIE,
+    '80275': MALATESTA,
+    '80578': PANTANO,
+    '82428': TORRE_ANGELA,
+    '82433': LODI,
+    '82437': MIRTI,
+    '82698': PIGNETO
 };
