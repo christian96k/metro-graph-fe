@@ -49,16 +49,21 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        # Rimuovi tutte le immagini con nome specifico tranne la latest
-                        docker images "${IMAGE_NAME}" --format "{{.ID}} {{.Tag}}" | \
+                        # Rimuovi tutte le immagini con tag diverso da "latest" per il progetto specifico
+                        docker images "${DOCKER_USERNAME}/${IMAGE_NAME}" --format "{{.ID}} {{.Tag}}" | \
                         grep -v "latest" | awk '{print $1}' | xargs -r docker rmi || true
 
-                        # Rimuovi tutte le immagini dangling (senza tag)
+                        # Rimuovi immagini con tag <none> ma con repository specifico
+                        docker images --format "{{.Repository}} {{.Tag}} {{.ID}}" | \
+                        grep "^${DOCKER_USERNAME}/${IMAGE_NAME} <none>" | awk '{print $3}' | xargs -r docker rmi || true
+
+                        # Rimuovi tutte le immagini dangling (senza repo e tag)
                         docker images -f "dangling=true" -q | xargs -r docker rmi || true
                     '''
                 }
             }
         }
+
 
          // Stage 4: Clean Docker Build Cache if >1GB
         stage('Clean Docker Build Cache if >1GB') {
