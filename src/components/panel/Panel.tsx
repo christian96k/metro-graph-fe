@@ -17,8 +17,6 @@ const Panel: React.FC<PanelProps> = ({ data, showOffcanvas }) => {
             style={{ visibility: showOffcanvas ? 'visible' : 'hidden' }}
             id="offcanvasPanel"
         >   
-
-            <h1>{'versioning test'}</h1>
             <div className="offcanvas-body p-0 d-flex flex-column">
                 <section className="top">
 
