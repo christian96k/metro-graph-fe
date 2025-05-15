@@ -23,12 +23,25 @@ function GraphMetro() {
         stops: [],
     });
 
+    // #region reset style
+    const resetStyle = useCallback(() => {
+        if (cyGraph.current) {
+            // cyGraph.current.elements().removeClass('hidden-path');
+            cyGraph.current.elements().removeClass('selected');
+            // cyGraph.current.elements().removeClass('highlighted');
+        }
+    },[]);
+
     //#region calculate path
     useShortestPath({
         cy: cyGraph.current,
         metroPath: metroPath$,
         useEuclidean: true,
         onPathFound: (pathDistance, duration, from, to, stops) => {
+            if(from.id.length === 0 && to.id.length === 0 &&  !metroStop$){
+                onGraphFitReset();
+            }
+            resetStyle();
             setPathInfo(
                 {
                     pathDistance,
@@ -46,24 +59,33 @@ function GraphMetro() {
 
     // #region handle node selection
     const onNodeClick = useCallback((event: cytoscape.EventObject) => {
-        console.log("Node selected:", event.target.data('label'));
-        if (cyGraph.current) {
-            const selectedNode = cyGraph.current.$(`#${event.target.id()}`);
-            if(selectedNode.hasClass('hidden-path')) return;
-            
-            cyGraph.current.animate({
-                fit: { eles: selectedNode, padding: 50 },
-                duration: 600,
-                easing: 'ease-in-out',
-            });
-            if(graphMetro$){
-                const activeMetroStop  = graphMetro$?.metro_stops.find((stop) => stop.stop_id === event.target.data('id'));
-                if(activeMetroStop)
-                    facadeSetMetroStop(activeMetroStop);
-                
-            } 
+    if (cyGraph.current) {
+        const selectedNode = cyGraph.current.$(`#${event.target.id()}`);
+        if (selectedNode.hasClass('hidden-path')) return;
+
+        
+        cyGraph.current.nodes().removeClass('selected');
+
+
+        selectedNode.addClass('selected');
+
+        cyGraph.current.animate({
+            fit: { eles: selectedNode, padding: 50 },
+            duration: 600,
+            easing: 'ease-in-out',
+        });
+
+        if (graphMetro$) {
+            const activeMetroStop = graphMetro$?.metro_stops.find(
+                (stop) => stop.stop_id === event.target.data('id')
+            );
+            if (activeMetroStop) {
+                facadeSetMetroStop(activeMetroStop);
+            }
         }
-    },[]);
+    }
+}, []);
+
 
     const onNodeHover = useCallback((event: cytoscape.EventObject) => {
         console.log("Node hovered:", event.target.data('label'));
@@ -77,9 +99,10 @@ function GraphMetro() {
         if (!event.target || event.target === cyGraph.current) {
             if (metroStop$) {
                 facadeResetMetroStop();
+                resetStyle();
             }
         }
-    }, [metroStop$]);
+    }, [metroStop$, cyGraph]);
 
     const onMetroSnapShot = useCallback((fill:boolean) => {
         if (cyGraph.current) {
@@ -101,6 +124,7 @@ function GraphMetro() {
     const onGraphFitReset = useCallback(() => {
         if (cyGraph.current) {
             const notHiddenNodes = cyGraph.current.elements().not('.hidden-path'); 
+            resetStyle();
             cyGraph.current.animate(
                 {
                     fit: { eles: notHiddenNodes, padding: 150 },
@@ -160,6 +184,16 @@ function GraphMetro() {
             <div className="graph-metro__tools position-absolute d-flex flex-column gap-4 align-items-center">
                 <button type="button" className="icon-gallery text-white font-size-18 d-flex justify-content-center align-items-center cursor-pointer" onClick={()=>onMetroSnapShot(false)}></button>
                 <button type="button" className="icon-deep-dive text-white font-size-18 d-flex justify-content-center align-items-center cursor-pointer" onClick={()=>onGraphFitReset()}></button>
+                <button type="button" className="icon-trash text-white font-size-18 d-flex justify-content-center align-items-center cursor-pointer" onClick={()=>
+                    {
+                        const buttonReset = document.querySelector('button[type="reset"]');
+                        resetStyle();
+                        if (buttonReset) 
+                            (buttonReset as HTMLButtonElement).click();
+                    }
+                    
+                }></button>
+            
             </div>
 
         </section>

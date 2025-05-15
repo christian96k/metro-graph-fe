@@ -5,7 +5,7 @@ const SCALE = 30000;
 function projectCoordinates(lat: number, lon: number) {
   return {
     x: lon * SCALE,
-    y: -lat * SCALE
+    y: -lat * SCALE 
   };
 }
 
@@ -75,6 +75,7 @@ export function mapDataElements(data: MetroData | null) {
                     lineId: line.id,
                     color: line.color
                 },
+                
             });
   
             used.add(next.stop_id);
@@ -104,25 +105,44 @@ export const NODE_COLORS = {
         LIGHT: '#008751',
     },
     DEFAULT: {
-        DARK: '#bbbbbb',
+        DARK: '#ffffff',
         LIGHT: '#eeeeee',
+    },
+    SELECTED: {
+        DARK: '#fff700',     
+        LIGHT: '#ffffff',  
     },
     WHITE: '#ffffff',
     BLACK: '#000000',
     GRAY: '#a3a3a3',
-}   
+}
 
 export function getNodeBgColor(lineType: string) {
     switch (lineType) {
         case 'A': 
-            return NODE_COLORS.A.DARK; 
+            return NODE_COLORS.A.LIGHT; 
         case 'B': 
         case 'B1': 
-            return NODE_COLORS.B.DARK; 
+            return NODE_COLORS.B.LIGHT; 
         case 'C': 
-            return NODE_COLORS.C.DARK; 
+            return NODE_COLORS.C.LIGHT; 
         default:
-            return NODE_COLORS.DEFAULT.DARK; 
+            return NODE_COLORS.DEFAULT.LIGHT; 
+    }
+}
+
+
+export function getLineShape(lineType: string) {
+    switch (lineType) {
+        case 'A': 
+            return 'elipse'; 
+        case 'B': 
+        case 'B1': 
+            return 'elipse'; 
+        case 'C': 
+            return 'elipse'; 
+        default:
+            return 'elipse'; 
     }
 }
 

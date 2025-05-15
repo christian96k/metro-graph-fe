@@ -43,12 +43,51 @@ pipeline {
             }
         }
 
-        // Stage 3: Rimuovi l'immagine locale dopo il push
-        stage('Remove Local Image') {
+
+        // Stage 3: Remove All Local unused Images
+        stage('Remove Local untagged local Images') {
             steps {
                 script {
-                    // Rimuovi l'immagine locale dopo il push al registry
-                    sh "docker rmi ${IMAGE_NAME}:${IMAGE_TAG}"
+                    sh '''
+                        # Rimuovi tutte le immagini con nome specifico tranne la latest
+                        docker images "${IMAGE_NAME}" --format "{{.ID}} {{.Tag}}" | \
+                        grep -v "latest" | awk '{print $1}' | xargs -r docker rmi || true
+
+                        # Rimuovi tutte le immagini dangling (senza tag)
+                        docker images -f "dangling=true" -q | xargs -r docker rmi || true
+                    '''
+                }
+            }
+        }
+
+         // Stage 4: Clean Docker Build Cache if >1GB
+        stage('Clean Docker Build Cache if >1GB') {
+            steps {
+                script {
+                    sh '''
+                        cache_size=$(docker system df | grep "Build Cache" | tr -s ' ' | cut -d' ' -f5)
+                        echo "Build cache size: $cache_size"
+
+                        num=$(echo $cache_size | grep -o -E '[0-9.]+')
+                        unit=$(echo $cache_size | grep -o -E '[A-Za-z]+')
+
+                        case $unit in
+                        GB) size_bytes=$(echo "$num * 1024 * 1024 * 1024" | bc) ;;
+                        MB) size_bytes=$(echo "$num * 1024 * 1024" | bc) ;;
+                        KB) size_bytes=$(echo "$num * 1024" | bc) ;;
+                        B)  size_bytes=$num ;;
+                        *)  size_bytes=0 ;;
+                        esac
+
+                        threshold=$((1 * 1024 * 1024 * 1024))
+
+                        if [ "$(echo "$size_bytes > $threshold" | bc -l)" = "1" ]; then
+                        echo "Build cache supera 1GB, pulisco..."
+                        docker builder prune -f
+                        else
+                        echo "Build cache sotto 1GB, niente pulizia."
+                        fi
+                    '''
                 }
             }
         }

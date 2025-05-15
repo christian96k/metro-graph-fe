@@ -2,11 +2,56 @@
 @use "../../assets/scss/viewport.scss" as viewport;
 
 .panel{
-    box-shadow: 0 7px 15px variables.$box-shadow-color;
+    // box-shadow: 0 7px 15px variables.$box-shadow-color;
     z-index: variables.$z-index-2;
     
     border-top-left-radius: variables.$border-radius-3;
     border-bottom-left-radius: variables.$border-radius-3;
+    border-bottom-left-radius: variables.$border-radius-3;
+
+    &.MA {
+        .panel__header{
+            border-left: 1px solid variables.$pure-black !important;
+            border-top-left-radius: variables.$border-radius-2 !important;
+            background: linear-gradient(to left, variables.$black-1, variables.$metro-a) !important;
+            @include viewport.custom-media-breakpoint-down(lg){
+                background: linear-gradient(to top, variables.$black-1, variables.$metro-a) !important;
+                border-left: unset !important;
+                border-top-right-radius: variables.$border-radius-2 !important;
+            }
+
+        }
+    }
+
+    &.MB,
+    .MB1 {
+        .panel__header{
+            border-left: 1px solid variables.$pure-black !important;
+            border-top-left-radius: variables.$border-radius-2 !important;
+            background: linear-gradient(to left, variables.$black-1, variables.$metro-b) !important;
+            @include viewport.custom-media-breakpoint-down(lg){
+                background: linear-gradient(to top, variables.$black-1, variables.$metro-b) !important;
+                border-left: unset !important;
+                border-top-right-radius: variables.$border-radius-2 !important;
+            }
+
+        }
+    }
+
+    &.MC {
+        .panel__header{
+            border-left: 1px solid variables.$pure-black !important;
+            border-top-left-radius: variables.$border-radius-2 !important;
+            background: linear-gradient(to left, variables.$black-1, variables.$metro-c) !important;
+            @include viewport.custom-media-breakpoint-down(lg){
+                background: linear-gradient(to top, variables.$black-1, variables.$metro-c) !important;
+                border-left: unset !important;
+                border-top-right-radius: variables.$border-radius-2 !important;
+            }
+
+        }
+    }
+    
 
     &.mobile{
         border-top-left-radius: variables.$border-radius-3;

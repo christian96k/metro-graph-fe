@@ -4,7 +4,7 @@ import { useDashboardFacade } from "../../pages/dashboard/store/dashboard.facade
 import { useCallback, useEffect, useRef, useState } from "react";
 
 function Header() {
-  const { graphMetro$, facadeSearchMetroPath, facadeResetMetroPath, facadeResetMetroStop } = useDashboardFacade();
+  const { graphMetro$,facadeSearchMetroPath, facadeResetMetroPath, facadeResetMetroStop } = useDashboardFacade();
 
   const [searchFrom, setSearchFrom] = useState<{name:string, id:string}>({name:'', id:''});
   const [searchTo, setSearchTo] = useState<{name:string, id:string}>({name:'', id:''});
@@ -24,6 +24,7 @@ function Header() {
     }
     
   }, [searchFrom, searchTo]);
+
   
 
   const onStopSelect = useCallback(

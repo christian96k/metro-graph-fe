@@ -44,15 +44,8 @@ export function useShortestPath({
 
     if (!sourceNode.nonempty() || !targetNode.nonempty()) {
       cy.elements().removeClass("hidden-path");
-      const noHiddenNodes = cy.elements().not('.hidden-path'); 
-      cy.animate({
-        fit: {
-          eles: noHiddenNodes,
-          padding: 150, 
-        },
-        duration: 600, 
-        easing: 'ease-in-out', 
-      });
+      
+     
       onPathFound?.('', '0', from, to, []); 
       return;
     }

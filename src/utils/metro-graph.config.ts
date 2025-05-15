@@ -1,5 +1,5 @@
 import cytoscape from "cytoscape";
-import { getEdgeColor, getNodeBgColor } from "./metro-graph.utils";
+import { getEdgeColor, getLineShape, getNodeBgColor, NODE_COLORS } from './metro-graph.utils';
 export interface MetroGraphConfig {
     
     LAYOUT: cytoscape.LayoutOptions;
@@ -29,15 +29,23 @@ export const METRO_GRAPH_CONFIG: MetroGraphConfig = {
             selector: 'node',
             css: {
                 'label': 'data(label)',
-                'background-color': (cy: cytoscape.NodeSingular) =>{
+                'background-color': () =>{
+                    return '#000000'
+
+                },
+                'width': '35px',
+                'height': '35px',
+                'border-width': '10px',
+                'border-color': (cy: cytoscape.NodeSingular) =>{
                     return getNodeBgColor(cy.data('lineType'))
                 },
-                'width': '55px',
-                'height': '55px',
-                'border-width': '2px',
-                'border-color': 'white',
                 'color': '#fff',
-                'font-size': '16px'
+                'font-size': '16px',
+                // @ts-ignore
+                "shape": (cy: cytoscape.NodeSingular) => {
+                    return getLineShape(cy.data('lineType') )
+                }
+                
             }
         },
         {
@@ -48,7 +56,11 @@ export const METRO_GRAPH_CONFIG: MetroGraphConfig = {
                     return getEdgeColor(cy.data('lineId'))
                 },
                 'target-arrow-color': '#ccc',
-                'target-arrow-shape': 'none'
+                'target-arrow-shape': 'none',
+                'line-cap': 'round',
+                'curve-style': 'bezier',
+                'opacity': 0.7,
+                'line-dash-pattern': [0, 0],              
             }
         },
         // hidden path
@@ -60,7 +72,19 @@ export const METRO_GRAPH_CONFIG: MetroGraphConfig = {
               'transition-duration': 0.5,
               'opacity': 0.1,
             }
-          }
+        },
+        // selected node
+        {
+            selector: '.selected',
+            css: {
+                'background-color': NODE_COLORS.SELECTED.LIGHT,
+                'border-color': NODE_COLORS.SELECTED.DARK,
+                'border-width': '6px',
+                'z-index': 10,
+                'color': NODE_COLORS.SELECTED.DARK,
+            }
+        }, 
+
     ],
     VIEW:{
         WIDTH:"100%",
