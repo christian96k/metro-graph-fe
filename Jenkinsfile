@@ -15,33 +15,30 @@ pipeline {
         stage('Build Image from Dockerfile') {
             steps {
                 script {
-                    // Verifica la versione di Docker
                     def dockerVersion = sh(script: 'docker --version', returnStdout: true).trim()
                     echo "Docker Version: ${dockerVersion}"
 
-                    // Costruisci l'immagine direttamente dal Dockerfile
-                    sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} ."
+                    // Build direttamente con il tag completo (con prefisso)
+                    sh "docker build -t ${FULL_IMAGE_NAME} ."
                 }
             }
         }
+
 
         // Stage 2: Login su Docker Hub e push dell'immagine
         stage('Login & Push to Docker Hub') {
             steps {
                 script {
-                    // Login su Docker Hub con le credenziali di Jenkins
                     withCredentials([usernamePassword(credentialsId: REGISTRY_CREDENTIALS, usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                         sh "echo \$DOCKER_PASSWORD | docker login -u \$DOCKER_USERNAME --password-stdin"
                     }
 
-                    // Tag dell'immagine con il nome completo
-                    sh "docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${FULL_IMAGE_NAME}"
-
-                    // Push dell'immagine su Docker Hub
+                    // Push direttamente senza taggare, perché già correttamente taggata
                     sh "docker push ${FULL_IMAGE_NAME}"
                 }
             }
         }
+
 
 
         // Stage 3: Remove All Local unused Images
